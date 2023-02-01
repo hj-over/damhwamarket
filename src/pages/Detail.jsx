@@ -4,9 +4,12 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Review from "../components/Review";
+import ReviewGradeStar from "../components/ReviewGradeStar";
 import Spinner from "../components/Spinner";
+import { useAuthContext } from "../context/AuthContext";
 
 const Detail = () => {
+  const { Authorization } = useAuthContext();
   const [isShown, setIsShown] = useState(true);
   const [x, setX] = useState(1);
 
@@ -25,11 +28,11 @@ const Detail = () => {
   const { data: reviews } = useQuery(["products", "review"], async () => {
     return axios
       .get(`http://192.168.0.203:8080/api/reviews/${productId}`)
-      .then((res) => res.data.data)
+      .then((res) => res.data)
       .catch((err) => console.log(err));
   });
   // console.log(reviews);
-  // console.log(productDetail);
+  console.log(productDetail);
 
   const handleClick = (event) => {
     setIsShown((current) => !current);
@@ -39,6 +42,21 @@ const Detail = () => {
   const handleMinus = () => {
     if (x === 1) return;
     setX(x - 1);
+  };
+
+  // 장바구니 추가 
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    const body = {
+      optionSeq: 0,
+      quantity: 0,
+    };
+    const header = {
+      headers: {
+        Authorization,
+      },
+    };
+    axios.post(`http://192.168.0.203:8080/api/carts`, body, header);
   };
 
   useEffect(() => {
@@ -65,7 +83,18 @@ const Detail = () => {
                 <p className="font-extrabold text-zinc-400 mb-2">
                   {productDetail.subName}
                 </p>
-                <p className="mb-8">별점</p>
+                <div className="mb-8">
+                  <ReviewGradeStar
+                    star={
+                      reviews && reviews.reviewGrade === null
+                        ? 1
+                        : reviews.reviewGrade
+                      // reviews && reviews.reviewGrade == null
+                      //   ? 0
+                      //   : reviews.reviewGrade
+                    }
+                  />
+                </div>
                 <p className="text-sm font-extrabold text-zinc-600 mb-2">
                   주종: {productDetail.type}
                 </p>
@@ -115,7 +144,9 @@ const Detail = () => {
             </div>
             <ul>
               {reviews &&
-                reviews.map((review, i) => <Review key={i} review={review} />)}
+                reviews.data.map((review, i) => (
+                  <Review key={i} review={review} />
+                ))}
             </ul>
           </div>
 
@@ -185,7 +216,10 @@ const Detail = () => {
               </div>
 
               <div className="flex mb-3">
-                <button className="flex mr-2 items-center justify-center w-buttonwidth h-12 border-slate-300 border rounded-md text-lg font-extrabold text-zinc-600 text-center hover:bg-gray-100 transition ease-in">
+                <button
+                  className="flex mr-2 items-center justify-center w-buttonwidth h-12 border-slate-300 border rounded-md text-lg font-extrabold text-zinc-600 text-center hover:bg-gray-100 transition ease-in"
+                  onClick={handleUpdate}
+                >
                   <img
                     src="/images/icon-cart.png"
                     alt="장바구니"
