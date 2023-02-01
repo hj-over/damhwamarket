@@ -7,8 +7,12 @@
 ### http://192.168.0.203:8080/swagger-ui/index.html
 
 
+![정보 구조도](https://user-images.githubusercontent.com/118712196/215967150-2c7f4131-0aad-4384-9042-fc45f3966a6e.PNG)
 
-## Front
+
+
+
+## < Front >
 
 ### 기대효과
 주문 배달 서비스 구현을 통해 자바스크립트 / 리액트 복습, api 연동 등을 다시 한번 학습합니다. <br/>
@@ -17,7 +21,7 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 ### 사용 프로그램
 
 ![visualcode](https://img.shields.io/badge/visualstudiocode-blue.svg?style=for-the-badge&logo=visualstudiocode&logoColor=white&logoWidth=20)
-![react](https://img.shields.io/badge/react-61DAFB.svg?style=for-the-badge&logo=react&logoColor=white&logoWidth=20)
+![react](https://img.shields.io/badge/react-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black&logoWidth=20)
 ![JavaScript](https://img.shields.io/badge/javascript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=white)
 ![figma](https://img.shields.io/badge/figma-F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 ![tailwindcss](https://img.shields.io/badge/tailwindcss-06B6D4.svg?style=for-the-badge&logo=tailwindcss&logoColor=white)<br/>
@@ -29,5 +33,10 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 ![sourcetree](https://img.shields.io/badge/sourcetree-0052CC.svg?style=for-the-badge&logo=sourcetree&logoColor=white&logoWidth=20) <br/>
 
 
-## Back
+## < Back >
+
+
+![Python](https://img.shields.io/badge/python-3776AB.svg?style=for-the-badge&logo=python&logoColor=white&logoWidth=20)
+![swagger](https://img.shields.io/badge/swagger-85EA2D.svg?style=for-the-badge&logo=swagger&logoColor=white&logoWidth=20)
+![java](https://img.shields.io/badge/java-FF9900.svg?style=for-the-badge&logo=JAVA&logoColor=white&logoWidth=20)
 
