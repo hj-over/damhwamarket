@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import SignUpDiv from "../style/signUpCss";
 const SignUp = () => {
-    const navigate = useNavigate();
     const [signUpUser, setSignUpUser] = useState({});
     const handelChange = (e) => {
         const { name, value } = e.target;
@@ -23,8 +21,6 @@ const SignUp = () => {
         axios
             .post("http://192.168.0.203:8080/api/users/join", body)
             .then((res) => res.data)
-            .then(() => alert("회원가입 성공"))
-            .then(() => navigate("/"))
             .catch((err) => console.log(err));
     };
 

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
+import { BsPersonCircle } from "react-icons/bs";
 const Header = () => {
+    const { user } = useAuthContext();
     const [text, setText] = useState("");
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -12,6 +15,7 @@ const Header = () => {
         navigate(`listing/${text}`);
         setText("");
     };
+    console.log(user);
     return (
         <div className="border-b-2">
             <div className="flex justify-between items-center mt-5 py-2 max-w-7xl mx-auto ">
@@ -35,16 +39,30 @@ const Header = () => {
                     </form>
                 </div>
                 <div className="flex items-center mb-5">
-                    <Link to="/login" className="mr-2">
-                        로그인
-                    </Link>
-                    <Link to="/basket">
-                        <img
-                            className="w-7 h-7"
-                            src="/images/basketIcon.png"
-                            alt="바구니"
-                        />
-                    </Link>
+                    {user === undefined && (
+                        <Link to="/login" className="mr-2">
+                            로그인
+                        </Link>
+                    )}
+                    {user && (
+                        <Link to="/basket">
+                            <img
+                                className="w-7 h-7"
+                                src="/images/basketIcon.png"
+                                alt="바구니"
+                            />
+                        </Link>
+                    )}
+                    {user && (
+                        <Link to="/mypage">
+                            <BsPersonCircle className="pl-2 w-full h-7 mb-2" />
+                            {user && (
+                                <p className="pl-2 w-full h-7">
+                                    {user.nickname}
+                                </p>
+                            )}
+                        </Link>
+                    )}
                 </div>
             </div>
         </div>
