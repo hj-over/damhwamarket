@@ -44,12 +44,12 @@ const Detail = () => {
     setX(x - 1);
   };
 
-  // 장바구니 추가 
+  // 장바구니 추가
   const handleUpdate = (e) => {
     e.preventDefault();
     const body = {
-      optionSeq: 0,
-      quantity: 0,
+      optionSeq: 3,
+      quantity: x,
     };
     const header = {
       headers: {
@@ -150,7 +150,7 @@ const Detail = () => {
             </ul>
           </div>
 
-          <div className="fixed right-1/4 top-28 w-rightwidth">
+          <div className="fixed right-1/4 top-32 w-rightwidth">
             <div
               className="flex flex-col py-7 px-2.5 items-start w-full border shadow-lg rounded-lg"
               style={{ height: isShown ? "585px" : "543px" }}

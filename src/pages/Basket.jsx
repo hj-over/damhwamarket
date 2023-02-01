@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import BasketCard from "../components/BasketCard";
+import Spinner from "../components/Spinner";
 import { useAuthContext } from "../context/AuthContext";
 
 const Basket = () => {
@@ -11,39 +13,21 @@ const Basket = () => {
     data: carts,
   } = useQuery(["carts"], async () => {
     return axios
-      .get(`http://192.168.0.203:8080/api/carts`, { headers: Authorization })
-      .then((res) => console.log(res))
+      .get(`http://192.168.0.203:8080/api/carts`, {
+        headers: { Authorization },
+      })
+      .then((res) => res.data.data)
       .catch((err) => console.log(err));
   });
-
+  console.log(carts);
   return (
     <div className="flex max-w-screen-xl mx-auto ">
       <div className="pl-56 w-5/6 min-h-1/2 ">
-        <p className="text-4xl font-bold text-amber-400 py-14">장바구니</p>
-
-        <div className="flex flex-col max-h-screen ">
-          <div>
-            <div className="flex border-3 border-red-200 p-6 rounded-xl mb-6">
-              <img
-                className="w-32 h-32"
-                src="https://cdn.pixabay.com/photo/2022/12/26/11/44/squirrel-7678830_960_720.jpg"
-                alt="z"
-              />
-              <div className="pl-14 pt-3 text-lg">
-                <div className="flex mb-3">
-                  <p className="pr-28 font-bold">제품</p>
-                  <p>신년 다복 세트</p>
-                </div>
-                <div className="flex mb-3">
-                  <p className="pr-20 font-bold">선택 옵션</p>
-                  <p className="pr-80">다복세트 1</p>
-                </div>
-                <p className="font-extrabold text-right">
-                  수량: 1개 / 36,900 원
-                </p>
-              </div>
-            </div>
-          </div>
+        <div>
+          <p className="text-4xl font-bold text-amber-400 py-14">장바구니</p>
+          {isLoading && <Spinner />}
+          {error && <p>에러났어요</p>}
+          {carts && carts.map((cart) => <BasketCard cart={cart} />)}
         </div>
       </div>
     </div>
