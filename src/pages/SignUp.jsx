@@ -21,8 +21,9 @@ const SignUp = () => {
         axios
             .post("http://192.168.0.203:8080/api/users/join", body)
             .then((res) => res.data)
-            .catch(console.log("실패"));
+            .catch((err) => console.log(err));
     };
+
     return (
         <div className="p-6 m-6">
             <SignUpDiv>
@@ -32,7 +33,7 @@ const SignUp = () => {
                     <input
                         type="text"
                         name="name"
-                        value={signUpUser.name}
+                        value={signUpUser.name || ""}
                         onChange={handelChange}
                         required
                     />
@@ -40,7 +41,7 @@ const SignUp = () => {
                     <input
                         type="email"
                         name="email"
-                        value={signUpUser.email}
+                        value={signUpUser.email || ""}
                         onChange={handelChange}
                         required
                     />
@@ -48,7 +49,7 @@ const SignUp = () => {
                     <input
                         type="password"
                         name="pwd"
-                        value={signUpUser.pwd}
+                        value={signUpUser.pwd || ""}
                         onChange={handelChange}
                         required
                     />
@@ -56,7 +57,7 @@ const SignUp = () => {
                     <input
                         type="text"
                         name="nickname"
-                        value={signUpUser.nickname}
+                        value={signUpUser.nickname || ""}
                         onChange={handelChange}
                         required
                     />
@@ -64,7 +65,7 @@ const SignUp = () => {
                     <input
                         type="date"
                         name="birth"
-                        value={signUpUser.birth}
+                        value={signUpUser.birth || ""}
                         onChange={handelChange}
                         required
                     />
@@ -72,7 +73,7 @@ const SignUp = () => {
                     <input
                         type="tel"
                         name="phone"
-                        value={signUpUser.phone}
+                        value={signUpUser.phone || ""}
                         onChange={handelChange}
                         required
                     />
@@ -80,7 +81,7 @@ const SignUp = () => {
                     <input
                         type="local"
                         name="address"
-                        value={signUpUser.address}
+                        value={signUpUser.address || ""}
                         onChange={handelChange}
                         required
                     />

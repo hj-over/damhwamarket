@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import LoginDiv from "../style/loginCss";
+
 const LogIn = () => {
-    const { user, setUser, Authorization } = useAuthContext();
+    const { setUser } = useAuthContext();
     const navigate = useNavigate();
     const [loginUser, setLoginUser] = useState({});
     const handelChange = (e) => {
@@ -22,29 +23,7 @@ const LogIn = () => {
             .then((res) => setUser(res.data))
             .then((err) => console.log(err));
     };
-    console.log(user);
-    const handleUpdate = async (e) => {
-        e.preventDefault();
-        const body = {
-            pwd: loginUser.pwd,
-            nickname: "승현연습",
-            address: "zzz",
-        };
-        const header = {
-            headers: {
-                Authorization,
-            },
-        };
-        axios
-            .put(
-                "http://192.168.0.203:8080/api/users/login/update",
-                body,
-                header
-            )
-            .then((res) => console.log(res.data))
-            .then((err) => console.log(err));
-    };
-    // console.log(loginUser);
+
     return (
         <div className="p-6 m-6">
             <LoginDiv>
@@ -54,7 +33,7 @@ const LogIn = () => {
                     <input
                         type="email"
                         name="email"
-                        value={loginUser.email}
+                        value={loginUser.email || ""}
                         onChange={handelChange}
                         required
                     />
@@ -77,7 +56,6 @@ const LogIn = () => {
                     </button>
                     <Link>아이디/비밀번호 찾기</Link>
                 </form>
-                <button onClick={handleUpdate}>정보수정</button>
             </LoginDiv>
         </div>
     );
