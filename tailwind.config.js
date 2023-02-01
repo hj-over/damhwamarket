@@ -29,6 +29,7 @@ module.exports = {
         fs10: "10px",
         fs11: "11px",
         fs13: "13px",
+        fs14: "14px",
         fs15: "15px",
       },
       spacing: {

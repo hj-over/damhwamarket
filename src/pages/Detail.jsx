@@ -76,7 +76,8 @@ const Detail = () => {
                   용량:{" "}
                   {productDetail &&
                     productDetail.options.map((option) => {
-                      return option.name.length;
+                      const last = option.name.indexOf("l") + 1;
+                      return option.name.slice(1, last);
                     })}
                 </p>
                 <p className="text-sm font-extrabold text-zinc-400 mb-8">
@@ -130,7 +131,7 @@ const Detail = () => {
               >
                 <option className="text-sm">어떤 옵션을 원하시나요?</option>
                 {productDetail.options.map((option) => (
-                  <option>{option.name}</option>
+                  <option key={option.seq}>{option.name}</option>
                 ))}
               </select>
 
@@ -145,11 +146,9 @@ const Detail = () => {
                   />
                 </div>
 
-                <input
-                  value={x}
-                  type="text"
-                  className="w-full h-full text-center pl-7 pr-7 border-x text-sm text-zinc-600 focus:outline-none"
-                />
+                <div className="w-full h-full text-center pl-7 pr-7 border-x text-fs14 text-zinc-600 focus:outline-none">
+                  {x}
+                </div>
 
                 <div className="flex w-full items-center justify-center">
                   <img
