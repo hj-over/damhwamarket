@@ -1,6 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import React from "react";
+import { useAuthContext } from "../context/AuthContext";
 
 const Basket = () => {
+  const { Authorization } = useAuthContext();
+  const {
+    isLoading,
+    error,
+    data: carts,
+  } = useQuery(["carts"], async () => {
+    return axios
+      .get(`http://192.168.0.203:8080/api/carts`, { headers: Authorization })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  });
+
   return (
     <div className="flex max-w-screen-xl mx-auto ">
       <div className="pl-56 w-5/6 min-h-1/2 ">
