@@ -27,7 +27,7 @@ const ListItem = ({
             {productName}
           </span>
           <span className="text-neutral-700 font-extrabold mb-2">
-            {mainPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
+            {mainPrice && mainPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
           </span>
           <div className="flex items-center mb-2">
             <img className="w-3 h-3 mr-1" src="/images/star.png" alt="별" />
