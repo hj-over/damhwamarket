@@ -22,7 +22,8 @@ const LogIn = () => {
             .then((res) => setUser(res.data))
             .then((err) => console.log(err));
     };
-    console.log(user);
+    console.log(loginUser);
+
     const handleUpdate = async (e) => {
         e.preventDefault();
         const body = {
@@ -54,7 +55,7 @@ const LogIn = () => {
                     <input
                         type="email"
                         name="email"
-                        value={loginUser.email}
+                        value={loginUser.email || ""}
                         onChange={handelChange}
                         required
                     />
