@@ -3,69 +3,106 @@ import { GoSearch } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { BsPersonCircle } from "react-icons/bs";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 const Header = () => {
-    const { user } = useAuthContext();
-    const [text, setText] = useState("");
-    const navigate = useNavigate();
-    const handleChange = (e) => {
-        setText(e.target.value);
+  const { Authorization, user, setUser } = useAuthContext();
+  const [text, setText] = useState("");
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`listing/${text}`);
+    setText("");
+  };
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    const body = {};
+    const header = {
+      headers: {
+        Authorization,
+      },
     };
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate(`listing/${text}`);
-        setText("");
-    };
-    console.log(user);
-    return (
-        <div className="border-b-2">
-            <div className="flex justify-between items-center mt-5 py-2 max-w-7xl mx-auto ">
-                <Link to="/" className="flex items-center mb-5">
-                    <img
-                        className="w-24 h-8 mr-2"
-                        src="/images/main-logo.png"
-                        alt="로고"
-                    />
-                    <h1 className="text-2xl">담화마켓</h1>
-                </Link>
-                <div className="flex items-center w-1/2 relative mb-5">
-                    <form className="w-full" onSubmit={handleSubmit}>
-                        <input
-                            className="w-full h-8 pl-3 bg-slate-200 rounded focus:outline-none"
-                            type="text"
-                            value={text}
-                            onChange={handleChange}
-                        />
-                        <GoSearch className="absolute right-10 top-2" />
-                    </form>
-                </div>
-                <div className="flex items-center mb-5">
-                    {user === undefined && (
-                        <Link to="/login" className="mr-2">
-                            로그인
-                        </Link>
-                    )}
-                    {user && (
-                        <Link to="/basket">
-                            <img
-                                className="w-7 h-7"
-                                src="/images/basketIcon.png"
-                                alt="바구니"
-                            />
-                        </Link>
-                    )}
-                    {user && (
-                        <Link to="/mypage">
-                            <BsPersonCircle className="pl-2 w-full h-7 mb-2" />
-                            {user && (
-                                <p className="pl-2 w-full h-7">
-                                    {user.nickname}
-                                </p>
-                            )}
-                        </Link>
-                    )}
-                </div>
-            </div>
+    axios
+      .post(`http://192.168.0.203:8080/api/users/logout`, body, header)
+      .then(() => setUser())
+      .catch(() => console.log("로그아웃실패"));
+  };
+
+  // const {
+  //   isLoading,
+  //   error,
+  //   data: carts,
+  // } = useQuery(["carts", user.nickname], async () => {
+  //   return axios
+  //     .get(`http://192.168.0.203:8080/api/carts`, {
+  //       headers: { Authorization },
+  //     })
+  //     .then((res) => res.data.data)
+  //     .catch((err) => console.log(err));
+  // });
+
+  return (
+    <div className="border-b-2">
+      <div className="flex justify-between items-center mt-5 py-2 max-w-7xl mx-auto ">
+        <Link to="/" className="flex items-center mb-5">
+          <img
+            className="w-24 h-8 mr-2"
+            src="/images/main-logo.png"
+            alt="로고"
+          />
+          <h1 className="text-2xl">담화마켓</h1>
+        </Link>
+        <div className="flex items-center w-1/2 relative mb-5">
+          <form className="w-full" onSubmit={handleSubmit}>
+            <input
+              className="w-full h-8 pl-3 bg-slate-200 rounded focus:outline-none"
+              type="text"
+              value={text}
+              onChange={handleChange}
+            />
+            <GoSearch className="absolute right-10 top-2" />
+          </form>
         </div>
-    );
+        <div className="relative flex items-center mb-5">
+          {user === undefined && (
+            <Link to="/login" className="mr-2">
+              로그인
+            </Link>
+          )}
+          {user && (
+            <button className="mr-2" onClick={handleLogout}>
+              로그아웃
+            </button>
+          )}
+          {user && (
+            <Link to="/basket">
+              <img
+                className="relative w-10 h-10 mr-10"
+                src="/images/basketIcon.png"
+                alt="바구니"
+              />
+            </Link>
+          )}{" "}
+          {/* {user && carts && (
+            <Link to="/basket">
+              <div className="absolute left-5 top-2 w-7 h-7 bg-red-400 rounded-full text-center align-middle text-white font-extrabold text-sm pt-1">
+                {carts.length}
+              </div>
+            </Link>
+          )} */}
+          {user && (
+            <Link to="/mypage">
+              <BsPersonCircle className="pl-2 w-full h-7 mb-2" />
+              {user && <p className="pl-2 w-full h-7">{user.nickname}</p>}
+            </Link>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 export default Header;

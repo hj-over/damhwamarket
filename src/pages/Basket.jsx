@@ -6,12 +6,12 @@ import Spinner from "../components/Spinner";
 import { useAuthContext } from "../context/AuthContext";
 
 const Basket = () => {
-  const { Authorization } = useAuthContext();
+  const { Authorization, user } = useAuthContext();
   const {
     isLoading,
     error,
     data: carts,
-  } = useQuery(["carts"], async () => {
+  } = useQuery(["carts", user ? user.nickname : ""], async () => {
     return axios
       .get(`http://192.168.0.203:8080/api/carts`, {
         headers: { Authorization },
@@ -27,7 +27,10 @@ const Basket = () => {
           <p className="text-4xl font-bold text-amber-400 py-14">장바구니</p>
           {isLoading && <Spinner />}
           {error && <p>에러났어요</p>}
-          {carts && carts.map((cart) => <BasketCard cart={cart} />)}
+          {carts &&
+            carts.map((cart) => (
+              <BasketCard key={cart.optionSeq} cart={cart} />
+            ))}
         </div>
       </div>
     </div>
