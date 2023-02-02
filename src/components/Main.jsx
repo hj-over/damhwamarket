@@ -75,7 +75,7 @@ const Main = () => {
           </p>
         </Link>
         <Link
-          to="/listing/takju"
+          to="/listing/막걸리"
           className="font-semibold text-xl box-border rounded-md h-60 w-40 hover:bg-gray-100"
         >
           <img
@@ -86,7 +86,7 @@ const Main = () => {
           탁주
         </Link>
         <Link
-          to="/listing/cheongju"
+          to="/listing/청주"
           className="font-semibold text-xl box-border rounded-md h-60 w-40 hover:bg-gray-100"
         >
           <img
@@ -97,7 +97,7 @@ const Main = () => {
           약&#183;청주
         </Link>
         <Link
-          to="/listing/jeungryuju"
+          to="/listing/소주"
           className="font-semibold text-xl box-border rounded-md h-60 w-40 hover:bg-gray-100"
         >
           <img
@@ -108,7 +108,7 @@ const Main = () => {
           증류주
         </Link>
         <Link
-          to="/listing/gwashilju"
+          to="/listing/와인"
           className="font-semibold text-xl box-border rounded-md h-60 w-40 hover:bg-gray-100"
         >
           <img
