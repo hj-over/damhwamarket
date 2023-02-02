@@ -13,6 +13,10 @@ const Detail = () => {
   const [isShown, setIsShown] = useState(true);
   const [x, setX] = useState(1);
 
+  const [reviewOptionName, setReviewOptionName] = useState("");
+  const [reviewGrade, setReviewGrade] = useState("");
+  const [reviewContent, setReviewContent] = useState("");
+
   const { productId } = useParams();
   // console.log(productId);
   const {
@@ -32,7 +36,7 @@ const Detail = () => {
       .catch((err) => console.log(err));
   });
   // console.log(reviews);
-  console.log(productDetail);
+  // console.log(productDetail);
 
   const handleClick = (event) => {
     setIsShown((current) => !current);
@@ -43,6 +47,28 @@ const Detail = () => {
     if (x === 1) return;
     setX(x - 1);
   };
+
+  // 리뷰 등록
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const body = {
+      // productSeq: productId,
+      // optionName: reviewOptionName,
+      grade: 1,
+      content: "쪼아",
+      // regDt: "2021-02-01T12:10:06.569Z",
+    };
+    const header = {
+      headers: {
+        Authorization,
+      },
+    };
+    axios
+      .put(`http://192.168.0.203:8080/api/reviews?reviewSeq${productId}`, body, header)
+      .then(console.log("리뷰등록성공"))
+      .catch(console.log("리뷰등록실패"));
+  };
+  console.log(new Date());
 
   // 장바구니 추가
   const handleUpdate = (e) => {
@@ -84,7 +110,7 @@ const Detail = () => {
                   {productDetail.subName}
                 </p>
                 <div className="mb-8">
-                  <ReviewGradeStar
+                  {/* <ReviewGradeStar
                     star={
                       reviews && reviews.reviewGrade === null
                         ? 1
@@ -93,7 +119,7 @@ const Detail = () => {
                       //   ? 0
                       //   : reviews.reviewGrade
                     }
-                  />
+                  /> */}
                 </div>
                 <p className="text-sm font-extrabold text-zinc-600 mb-2">
                   주종: {productDetail.type}
@@ -142,12 +168,40 @@ const Detail = () => {
                 리뷰
               </button>
             </div>
-            <ul>
-              {reviews &&
-                reviews.data.map((review, i) => (
-                  <Review key={i} review={review} />
-                ))}
-            </ul>
+            <div>
+              <form onSubmit={handleSubmit}>
+                <label>옵션이름</label>
+                <input
+                  type="text"
+                  name="optionName"
+                  value={reviewOptionName}
+                  onChange={(e) => setReviewOptionName(e.target.value)}
+                />
+
+                <label>별점</label>
+                <input
+                  type="text"
+                  name="grade"
+                  value={reviewGrade}
+                  onChange={(e) => setReviewGrade(e.target.value)}
+                />
+
+                <label>내용</label>
+                <input
+                  type="text"
+                  name="content"
+                  value={reviewContent}
+                  onChange={(e) => setReviewContent(e.target.value)}
+                />
+                <button>등록</button>
+              </form>
+              <ul>
+                {reviews &&
+                  reviews.data.map((review, i) => (
+                    <Review key={i} review={review} />
+                  ))}
+              </ul>
+            </div>
           </div>
 
           <div className="fixed right-1/4 top-32 w-rightwidth">
