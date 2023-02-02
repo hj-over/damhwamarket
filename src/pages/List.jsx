@@ -8,7 +8,8 @@ import ListItem from "../components/ListItem";
 import NavList from "../components/NavList";
 import Spinner from "../components/Spinner";
 import { v4 as uuidv4 } from "uuid";
-
+// http://192.168.0.203:8080/api/products/categories?keyword=${keyword}
+// takju chungju soju wine
 const List = () => {
   const [filter, setFilter] = useState([]);
   const { category } = useParams();

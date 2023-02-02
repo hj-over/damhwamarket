@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import { useState } from "react";
 import BasketCard from "../components/BasketCard";
 import Spinner from "../components/Spinner";
 import { useAuthContext } from "../context/AuthContext";
@@ -19,6 +20,8 @@ const Basket = () => {
       .then((res) => res.data.data)
       .catch((err) => console.log(err));
   });
+  const [totalPrice, setTotalPrice] = useState(0);
+
   console.log(carts);
   return (
     <div className="flex max-w-screen-xl mx-auto ">
@@ -29,8 +32,14 @@ const Basket = () => {
           {error && <p>에러났어요</p>}
           {carts &&
             carts.map((cart) => (
-              <BasketCard key={cart.optionSeq} cart={cart} />
+              <BasketCard key={cart.optionSeq} cart={cart} setTotalPrice={setTotalPrice} />
             ))}
+          {carts && (
+            <div>
+              <p>{totalPrice}</p>
+              <button>구매하기</button>
+            </div>
+          )}
         </div>
       </div>
     </div>
