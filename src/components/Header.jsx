@@ -18,8 +18,7 @@ const Header = () => {
     setText("");
   };
 
-  const handleLogout = (e) => {
-    e.preventDefault();
+  const handleLogout = () => {
     const body = {};
     const header = {
       headers: {
@@ -38,12 +37,14 @@ const Header = () => {
     error,
     data: carts,
   } = useQuery(["carts", user && user.nickname], async () => {
-    return axios
-      .get(`http://192.168.0.203:8080/api/carts`, {
-        headers: { Authorization },
-      })
-      .then((res) => res.data.data)
-      .catch((err) => console.log(err));
+    return user
+      ? axios
+          .get(`http://192.168.0.203:8080/api/carts`, {
+            headers: { Authorization },
+          })
+          .then((res) => res.data.data)
+          .catch((err) => console.log(err))
+      : "";
   });
 
   return (
@@ -70,19 +71,30 @@ const Header = () => {
         </div>
         <div className="relative flex items-center mb-5">
           {user === undefined && (
-            <Link to="/login" className="mr-2">
+            <Link to="/login" className="mr-7 text-fs18">
               로그인
             </Link>
           )}
+          {user === undefined && (
+            <Link to="/signup" className="mr-2 text-fs18">
+              회원가입
+            </Link>
+          )}
           {user && (
-            <button className="mr-2" onClick={handleLogout}>
+            <button
+              className="mr-5 text-fs18"
+              onClick={() => {
+                handleLogout();
+                navigate("/login");
+              }}
+            >
               로그아웃
             </button>
           )}
           {user && (
             <Link to="/basket">
               <img
-                className="relative w-10 h-10 mr-10"
+                className="relative w-10 h-10 mr-5"
                 src="/images/basketIcon.png"
                 alt="바구니"
               />
@@ -90,15 +102,17 @@ const Header = () => {
           )}
           {user && carts && (
             <Link to="/basket">
-              <div className="absolute left-88px top-2 w-7 h-7 bg-red-400 rounded-full text-center align-middle text-white font-extrabold text-sm pt-1">
+              <div className="absolute left-100px top-0 w-7 h-7 bg-red-400 rounded-full text-center align-middle text-white font-extrabold text-sm pt-1">
                 {carts.length}
               </div>
             </Link>
           )}
           {user && (
             <Link to="/mypage">
-              <BsPersonCircle className="pl-2 w-full h-7 mb-2" />
-              {user && <p className="pl-2 w-full h-7">{user.nickname}</p>}
+              <div className="grid grid-cols-2">
+                <BsPersonCircle className="w-full h-8" />
+                {user && <p className="w-full h-8 pt-1 text-fs18">{user.nickname}</p>}
+                </div>
             </Link>
           )}
         </div>

@@ -20,9 +20,23 @@ const Basket = () => {
       .then((res) => res.data.data)
       .catch((err) => console.log(err));
   });
-  const [totalPrice, setTotalPrice] = useState(0);
+  const handlePay = () => {
+    const body = {
+      couponSeq: null,
+      point: 0,
+    };
+    const header = {
+      headers: {
+        Authorization,
+      },
+    };
+    axios
+      .post("http://192.168.0.203:8080/api/carts/order", body, header)
+      .then(() => console.log("결제성공"));
+  };
 
-  console.log(carts);
+  const [totalPrice, setTotalPrice] = useState(0);
+  // console.log(carts);
   return (
     <div className="flex max-w-screen-xl mx-auto ">
       <div className="pl-56 w-5/6 min-h-1/2 ">
@@ -32,12 +46,16 @@ const Basket = () => {
           {error && <p>에러났어요</p>}
           {carts &&
             carts.map((cart) => (
-              <BasketCard key={cart.optionSeq} cart={cart} setTotalPrice={setTotalPrice} />
+              <BasketCard
+                key={cart.optionSeq}
+                cart={cart}
+                setTotalPrice={setTotalPrice}
+              />
             ))}
           {carts && (
             <div>
               <p>{totalPrice}</p>
-              <button>구매하기</button>
+              <button onClick={handlePay}>구매하기</button>
             </div>
           )}
         </div>
