@@ -32,18 +32,19 @@ const Header = () => {
       .catch(() => console.log("로그아웃실패"));
   };
 
-  // const {
-  //   isLoading,
-  //   error,
-  //   data: carts,
-  // } = useQuery(["carts", user.nickname], async () => {
-  //   return axios
-  //     .get(`http://192.168.0.203:8080/api/carts`, {
-  //       headers: { Authorization },
-  //     })
-  //     .then((res) => res.data.data)
-  //     .catch((err) => console.log(err));
-  // });
+  // 비로그인시 비활성화
+  const {
+    isLoading,
+    error,
+    data: carts,
+  } = useQuery(["carts", user && user.nickname], async () => {
+    return axios
+      .get(`http://192.168.0.203:8080/api/carts`, {
+        headers: { Authorization },
+      })
+      .then((res) => res.data.data)
+      .catch((err) => console.log(err));
+  });
 
   return (
     <div className="border-b-2">
@@ -86,14 +87,14 @@ const Header = () => {
                 alt="바구니"
               />
             </Link>
-          )}{" "}
-          {/* {user && carts && (
+          )}
+          {user && carts && (
             <Link to="/basket">
-              <div className="absolute left-5 top-2 w-7 h-7 bg-red-400 rounded-full text-center align-middle text-white font-extrabold text-sm pt-1">
+              <div className="absolute left-88px top-2 w-7 h-7 bg-red-400 rounded-full text-center align-middle text-white font-extrabold text-sm pt-1">
                 {carts.length}
               </div>
             </Link>
-          )} */}
+          )}
           {user && (
             <Link to="/mypage">
               <BsPersonCircle className="pl-2 w-full h-7 mb-2" />

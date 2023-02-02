@@ -17,6 +17,8 @@ const Detail = () => {
   const [reviewGrade, setReviewGrade] = useState("");
   const [reviewContent, setReviewContent] = useState("");
 
+  const [selectIndex, setSelectIndex] = useState();
+
   const { productId } = useParams();
   // console.log(productId);
   const {
@@ -29,7 +31,7 @@ const Detail = () => {
       .then((res) => res.data.data)
       .catch((err) => console.log(err));
   });
-  const { data: reviews } = useQuery(["products", "review"], async () => {
+  const { data: reviews } = useQuery(["products", productId], async () => {
     return axios
       .get(`http://192.168.0.203:8080/api/reviews/${productId}`)
       .then((res) => res.data)
@@ -64,17 +66,22 @@ const Detail = () => {
       },
     };
     axios
-      .put(`http://192.168.0.203:8080/api/reviews?reviewSeq${productId}`, body, header)
+      .put(
+        `http://192.168.0.203:8080/api/reviews?reviewSeq${productId}`,
+        body,
+        header
+      )
       .then(console.log("리뷰등록성공"))
       .catch(console.log("리뷰등록실패"));
   };
-  console.log(new Date());
+  // console.log(new Date());
 
   // 장바구니 추가
   const handleUpdate = (e) => {
     e.preventDefault();
+    console.log(productDetail.options[0]);
     const body = {
-      optionSeq: 3,
+      optionSeq: productDetail && productDetail.options[0].seq,
       quantity: x,
     };
     const header = {
@@ -84,7 +91,8 @@ const Detail = () => {
     };
     axios.post(`http://192.168.0.203:8080/api/carts`, body, header);
   };
-
+  // console.log(productDetail.options);
+console.log(reviewContent);
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
@@ -110,16 +118,15 @@ const Detail = () => {
                   {productDetail.subName}
                 </p>
                 <div className="mb-8">
-                  {/* <ReviewGradeStar
-                    star={
-                      reviews && reviews.reviewGrade === null
-                        ? 1
-                        : reviews.reviewGrade
-                      // reviews && reviews.reviewGrade == null
-                      //   ? 0
-                      //   : reviews.reviewGrade
-                    }
-                  /> */}
+                  {reviews && (
+                    <ReviewGradeStar
+                      star={
+                        reviews && reviews.reviewGrade === null
+                          ? 0
+                          : reviews.reviewGrade
+                      }
+                    />
+                  )}
                 </div>
                 <p className="text-sm font-extrabold text-zinc-600 mb-2">
                   주종: {productDetail.type}
@@ -134,9 +141,6 @@ const Detail = () => {
                       const last = option.name.indexOf("l") + 1;
                       return option.name.slice(1, last);
                     })}
-                </p>
-                <p className="text-sm font-extrabold text-zinc-400 mb-8">
-                  배송기간: 2일 이내 배송
                 </p>
                 <p className="text-sm font-extrabold text-zinc-600 mb-2">
                   판매가격:
@@ -186,9 +190,10 @@ const Detail = () => {
                   onChange={(e) => setReviewGrade(e.target.value)}
                 />
 
+                {/* 리뷰작성 이미지 전송 */}
                 <label>내용</label>
                 <input
-                  type="text"
+                  type="file"
                   name="content"
                   value={reviewContent}
                   onChange={(e) => setReviewContent(e.target.value)}
@@ -212,7 +217,9 @@ const Detail = () => {
               <label className="mb-2.5 text-fs15 font-extrabold">옵션</label>
               <select
                 className="mb-6 w-full h-11 pr border rounded-sm text-xs text-center focus:outline-none"
-                onChange={(e) => console.log(e.target.value)}
+                onChange={(e) =>
+                  setSelectIndex(e.currentTarget.selectedIndex - 1)
+                }
               >
                 <option className="text-sm">어떤 옵션을 원하시나요?</option>
                 {productDetail.options.map((option) => (
