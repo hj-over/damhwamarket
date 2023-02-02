@@ -6,8 +6,9 @@
 
 ### http://192.168.0.203:8080/swagger-ui/index.html
 
+#### <정보구조도>
+![정보 구조도](https://user-images.githubusercontent.com/118712196/216228059-b3886c29-cb39-41bf-a99f-d862c412d390.PNG)
 
-![정보 구조도](https://user-images.githubusercontent.com/118712196/215967150-2c7f4131-0aad-4384-9042-fc45f3966a6e.PNG)
 
 
 
@@ -36,6 +37,7 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 ## < Back >
 
 
+### 사용 프로그램
 ![Python](https://img.shields.io/badge/python-3776AB.svg?style=for-the-badge&logo=python&logoColor=white&logoWidth=20)
 ![swagger](https://img.shields.io/badge/swagger-85EA2D.svg?style=for-the-badge&logo=swagger&logoColor=white&logoWidth=20)
 ![java](https://img.shields.io/badge/java-FF9900.svg?style=for-the-badge&logo=JAVA&logoColor=white&logoWidth=20)
