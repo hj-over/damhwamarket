@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 
 const Review = ({
   review: { nickname, grade, content, regDt, optionName },

@@ -31,10 +31,11 @@ module.exports = {
         fs13: "13px",
         fs14: "14px",
         fs15: "15px",
+        fs18: "18px",
       },
       spacing: {
         "84px": "84px",
-        "88px": "88px",
+        "100px": "100px",
       },
       lineHeight: {
         44: "44px",

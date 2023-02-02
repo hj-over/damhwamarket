@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
@@ -13,10 +14,10 @@ const BasketCard = ({ cart, setTotalPrice }) => {
     thumbImg,
     optionPrice,
   } = cart;
-  const { Authorization } = useAuthContext();
+  const { Authorization, user } = useAuthContext();
+  const queryClinet = useQueryClient();
 
-  const handlePlus = (e) => {
-    e.preventDefault();
+  const handlePlus = () => {
     const quantity = ++cart.quantity;
     const body = {
       optionSeq,
@@ -31,8 +32,14 @@ const BasketCard = ({ cart, setTotalPrice }) => {
       .put("http://192.168.0.203:8080/api/carts", body, header)
       .then(() => console.log("더하기"));
   };
-  const handleMinus = (e) => {
-    e.preventDefault();
+
+  const muHandlePlus = useMutation(() => handlePlus(), {
+    onSuccess: () => {
+      queryClinet.invalidateQueries(["carts", user && user.nickname]);
+    },
+  });
+
+  const handleMinus = () => {
     const quantity = --cart.quantity;
     const body = {
       optionSeq,
@@ -48,9 +55,13 @@ const BasketCard = ({ cart, setTotalPrice }) => {
       .then(() => console.log("빼기"));
   };
 
-  const handleDelete = (e) => {
-    e.preventDefault();
+  const muHandleMinus = useMutation(handleMinus, {
+    onSuccess: () => {
+      queryClinet.invalidateQueries(["carts", user && user.nickname]);
+    },
+  });
 
+  const handleDelete = () => {
     const header = {
       headers: {
         Authorization,
@@ -60,6 +71,12 @@ const BasketCard = ({ cart, setTotalPrice }) => {
       .delete(`http://192.168.0.203:8080/api/carts?seq=${optionSeq}`, header)
       .then(() => console.log("삭제"));
   };
+
+  const muHandleDelete = useMutation(handleDelete, {
+    onSuccess: () => {
+      queryClinet.invalidateQueries(["carts", user && user.nickname]);
+    },
+  });
 
   // 장바구니 총 가격, 상위 컴포넌트 : Basket
   useEffect(() => {
@@ -96,7 +113,7 @@ const BasketCard = ({ cart, setTotalPrice }) => {
                   src="/images/icon-minus.png"
                   alt="마이너스"
                   className="w-6 h-6 cursor-pointer"
-                  onClick={handleMinus}
+                  onClick={muHandleMinus.mutate}
                 />
               </div>
 
@@ -109,11 +126,11 @@ const BasketCard = ({ cart, setTotalPrice }) => {
                   src="/images/icon-plus.png"
                   alt="플러스"
                   className="w-6 h-6 cursor-pointer"
-                  onClick={handlePlus}
+                  onClick={() => muHandlePlus.mutate()}
                 />
               </div>
             </div>
-            <button className="border" onClick={handleDelete}>
+            <button className="border" onClick={muHandleDelete.mutate}>
               삭제버튼
             </button>
           </div>

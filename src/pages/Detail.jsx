@@ -81,7 +81,7 @@ const Detail = () => {
     e.preventDefault();
     console.log(productDetail.options[0]);
     const body = {
-      optionSeq: productDetail && productDetail.options[0].seq,
+      optionSeq: productDetail && productDetail.options[selectIndex].seq,
       quantity: x,
     };
     const header = {
@@ -92,7 +92,7 @@ const Detail = () => {
     axios.post(`http://192.168.0.203:8080/api/carts`, body, header);
   };
   // console.log(productDetail.options);
-console.log(reviewContent);
+  console.log(reviewContent);
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
