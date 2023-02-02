@@ -44,7 +44,7 @@ const Header = () => {
           })
           .then((res) => res.data.data)
           .catch((err) => console.log(err))
-      : "";
+      : null;
   });
 
   return (
@@ -111,8 +111,12 @@ const Header = () => {
             <Link to="/mypage">
               <div className="grid grid-cols-2">
                 <BsPersonCircle className="w-full h-8" />
-                {user && <p className="w-full h-8 pt-1 ml-1 text-fs18">{user.nickname}</p>}
-                </div>
+                {user && (
+                  <p className="w-full h-8 pt-1 ml-1 text-fs18">
+                    {user.nickname}
+                  </p>
+                )}
+              </div>
             </Link>
           )}
         </div>

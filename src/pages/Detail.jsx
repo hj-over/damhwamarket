@@ -14,8 +14,10 @@ const Detail = () => {
   const [x, setX] = useState(1);
 
   const [reviewOptionName, setReviewOptionName] = useState("");
-  const [reviewGrade, setReviewGrade] = useState("");
+  const [reviewGrade, setReviewGrade] = useState();
   const [reviewContent, setReviewContent] = useState("");
+  const [reviewRegDt, setReviewRegDt] = useState("");
+  console.log(reviewOptionName, reviewGrade, reviewContent, reviewRegDt);
 
   const [selectIndex, setSelectIndex] = useState();
 
@@ -38,7 +40,7 @@ const Detail = () => {
       .catch((err) => console.log(err));
   });
   // console.log(reviews);
-  // console.log(productDetail);
+  console.log(productDetail);
 
   const handleClick = (event) => {
     setIsShown((current) => !current);
@@ -54,11 +56,11 @@ const Detail = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = {
-      // productSeq: productId,
-      // optionName: reviewOptionName,
-      grade: 1,
-      content: "쪼아",
-      // regDt: "2021-02-01T12:10:06.569Z",
+      productSeq: productId,
+      optionName: reviewOptionName,
+      grade: reviewGrade,
+      content: reviewContent,
+      regDt: reviewRegDt,
     };
     const header = {
       headers: {
@@ -66,11 +68,7 @@ const Detail = () => {
       },
     };
     axios
-      .put(
-        `http://192.168.0.203:8080/api/reviews?reviewSeq${productId}`,
-        body,
-        header
-      )
+      .post(`http://192.168.0.203:8080/api/reviews`, body, header)
       .then(console.log("리뷰등록성공"))
       .catch(console.log("리뷰등록실패"));
   };
@@ -92,7 +90,7 @@ const Detail = () => {
     axios.post(`http://192.168.0.203:8080/api/carts`, body, header);
   };
   // console.log(productDetail.options);
-  console.log(reviewContent);
+  // console.log(reviewContent);
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
@@ -125,6 +123,7 @@ const Detail = () => {
                           ? 0
                           : reviews.reviewGrade
                       }
+                      size={30}
                     />
                   )}
                 </div>
@@ -133,14 +132,6 @@ const Detail = () => {
                 </p>
                 <p className="text-sm font-extrabold text-zinc-600 mb-2">
                   도수: {productDetail.level.toFixed(2)}%
-                </p>
-                <p className="text-sm font-extrabold text-zinc-600 mb-2">
-                  용량:{" "}
-                  {productDetail &&
-                    productDetail.options.map((option) => {
-                      const last = option.name.indexOf("l") + 1;
-                      return option.name.slice(1, last);
-                    })}
                 </p>
                 <p className="text-sm font-extrabold text-zinc-600 mb-2">
                   판매가격:
@@ -184,19 +175,26 @@ const Detail = () => {
 
                 <label>별점</label>
                 <input
-                  type="text"
+                  type="number"
                   name="grade"
                   value={reviewGrade}
                   onChange={(e) => setReviewGrade(e.target.value)}
                 />
 
-                {/* 리뷰작성 이미지 전송 */}
                 <label>내용</label>
                 <input
-                  type="file"
+                  type="text"
                   name="content"
                   value={reviewContent}
                   onChange={(e) => setReviewContent(e.target.value)}
+                />
+
+                <label>날짜</label>
+                <input
+                  type="date"
+                  name="regDt"
+                  value={reviewRegDt}
+                  onChange={(e) => setReviewRegDt(e.target.value)}
                 />
                 <button>등록</button>
               </form>
@@ -231,7 +229,11 @@ const Detail = () => {
               <div className="flex items-center justify-center w-full h-11 mb-6 border rounded-sm text-xs font-extrabold text-center leading-44">
                 <div className="flex w-full items-center justify-center">
                   <img
-                    src="/images/icon-minus.png"
+                    src={
+                      x === 1
+                        ? "/images/icon-minus.png"
+                        : "/images/icon-minus-active.png"
+                    }
                     alt="마이너스"
                     className="w-6 h-6 cursor-pointer"
                     onClick={handleMinus}
