@@ -94,7 +94,7 @@ const Main = () => {
             alt="cheongju"
             className="mt-5 mb-3"
           />
-          청주
+          약&#183;청주
         </Link>
         <Link
           to="/listing/jeungryuju"

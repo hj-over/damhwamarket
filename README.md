@@ -6,8 +6,9 @@
 
 ### http://192.168.0.203:8080/swagger-ui/index.html
 
+#### <정보구조도>
+![정보 구조도](https://user-images.githubusercontent.com/118712196/216228059-b3886c29-cb39-41bf-a99f-d862c412d390.PNG)
 
-![정보 구조도](https://user-images.githubusercontent.com/118712196/215967150-2c7f4131-0aad-4384-9042-fc45f3966a6e.PNG)
 
 
 
@@ -20,7 +21,7 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 
 ### 사용 프로그램
 
-![visualcode](https://img.shields.io/badge/visualstudiocode-blue.svg?style=for-the-badge&logo=visualstudiocode&logoColor=white&logoWidth=20)
+![visualcode](https://img.shields.io/badge/visualstudiocode-007ACC.svg?style=for-the-badge&logo=visualstudiocode&logoColor=white&logoWidth=20)
 ![react](https://img.shields.io/badge/react-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black&logoWidth=20)
 ![JavaScript](https://img.shields.io/badge/javascript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=white)
 ![figma](https://img.shields.io/badge/figma-F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
@@ -33,10 +34,36 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 ![sourcetree](https://img.shields.io/badge/sourcetree-0052CC.svg?style=for-the-badge&logo=sourcetree&logoColor=white&logoWidth=20) <br/>
 
 
+<br/>
+<br/>
+
+
 ## < Back >
 
 
-![Python](https://img.shields.io/badge/python-3776AB.svg?style=for-the-badge&logo=python&logoColor=white&logoWidth=20)
+### 사용 프로그램
+
+#### 개발환경 및 개발툴
+
+![Window10OS](https://img.shields.io/badge/Window_10_OS-0078D4.svg?style=for-the-badge&logo=Window_10_OS&logoColor=white&logoWidth=20)
+![visualcode](https://img.shields.io/badge/visualstudiocode-007ACC.svg?style=for-the-badge&logo=visualstudiocode&logoColor=white&logoWidth=20)
+![DBeaver](https://img.shields.io/badge/DBeaver-000000.svg?style=for-the-badge&logo=DBeaver&logoColor=white&logoWidth=20)
+
+#### 사용된 기술 및 언어
 ![swagger](https://img.shields.io/badge/swagger-85EA2D.svg?style=for-the-badge&logo=swagger&logoColor=white&logoWidth=20)
 ![java](https://img.shields.io/badge/java-FF9900.svg?style=for-the-badge&logo=JAVA&logoColor=white&logoWidth=20)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1.svg?style=for-the-badge&logo=MySQL&logoColor=white&logoWidth=20)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-6DB33F.svg?style=for-the-badge&logo=SpringBoot&logoColor=white&logoWidth=20)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white&logoWidth=20)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=CSS3&logoColor=white&logoWidth=20)
+![BootStrap](https://img.shields.io/badge/BootStrap-7952B3.svg?style=for-the-badge&logo=BootStrap&logoColor=white&logoWidth=20)
+![thymeleaf](https://img.shields.io/badge/thymeleaf-005F0F.svg?style=for-the-badge&logo=thymeleaf&logoColor=white&logoWidth=20)
+![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white&logoWidth=20)
 
+#### 코드 및 버전관리
+![github](https://img.shields.io/badge/github-181717.svg?style=for-the-badge&logo=github&logoColor=white&logoWidth=20)
+![git](https://img.shields.io/badge/git-F05032.svg?style=for-the-badge&logo=git&logoColor=white&logoWidth=20)
+
+#### 협업 툴
+<a href="https://tourmaline-atlasaurus-77b.notion.site/FB-1-50dbb3df74e040c394809ad8e97b4927"><img src="https://img.shields.io/badge/notion-000000.svg?style=for-the-badge&logo=notion&logoColor=white&link=https://tourmaline-atlasaurus-77b.notion.site/FB-1-50dbb3df74e040c394809ad8e97b4927"></a>
+![slack](https://img.shields.io/badge/slack-4A154B.svg?style=for-the-badge&logo=slack&logoColor=white&logoWidth=20) <br/>
