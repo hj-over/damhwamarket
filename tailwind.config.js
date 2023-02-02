@@ -35,7 +35,7 @@ module.exports = {
       },
       spacing: {
         "84px": "84px",
-        "100px": "100px",
+        "107px": "107px",
       },
       lineHeight: {
         44: "44px",

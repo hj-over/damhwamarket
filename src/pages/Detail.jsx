@@ -211,7 +211,7 @@ const Detail = () => {
 
           <div className="fixed right-1/4 top-32 w-rightwidth">
             <div
-              className="flex flex-col py-7 px-2.5 items-start w-full border shadow-lg rounded-lg"
+              className="flex flex-col py-7 px-2.5 items-start w-full border shadow-lg rounded-lg bg-white"
               style={{ height: isShown ? "585px" : "543px" }}
             >
               <label className="mb-2.5 text-fs15 font-extrabold">옵션</label>

@@ -21,6 +21,7 @@ const OrderDetail = () => {
         .then((res) => res.data.payList);
     }
   );
+  console.log(orderDetails);
   return (
     <div className="pl-56 w-5/6 min-h-1/2 ">
       <p className="text-4xl font-bold text-amber-400 py-14">주문내역</p>
@@ -29,9 +30,9 @@ const OrderDetail = () => {
           {orderDetails &&
             orderDetails.map((orderDetail) => (
               <OrderDetailCard
-                key={orderDetail.seq}
                 orderDetail={orderDetail}
-              ></OrderDetailCard>
+                key={orderDetail.seq}
+              />
             ))}
           <div className="border-dotted border-3 rounded-xl p-6 border-red-200 mt-10 text-center ">
             <p className="pb-10 text-2xl text-center">
