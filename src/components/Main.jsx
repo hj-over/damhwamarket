@@ -75,7 +75,7 @@ const Main = () => {
           </p>
         </Link>
         <Link
-          to="/listing/탁주"
+          to="/listing/막걸리"
           className="font-semibold text-xl box-border rounded-md h-60 w-40 hover:bg-gray-100"
         >
           <img
