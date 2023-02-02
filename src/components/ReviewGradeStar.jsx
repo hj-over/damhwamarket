@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-function ReviewGradeStar({ star }) {
+function ReviewGradeStar({ star, size }) {
+  // console.log(star, size);
   const AVR_RATE = star * 20;
   const STAR_IDX_ARR = ["first", "second", "third", "fourth", "last"];
   const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
@@ -27,13 +28,13 @@ function ReviewGradeStar({ star }) {
           <span className="star_icon" key={`${item}_${idx}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
+              width={size}
+              height={size}
               viewBox="0 0 14 13"
               fill="#cacaca"
             >
               <clipPath id={`${item}StarClip`}>
-                <rect width={`${ratesResArr[idx]}`} height="30" />
+                <rect width={`${ratesResArr[idx]}`} height={size} />
               </clipPath>
               <path
                 id={`${item}Star`}
