@@ -15,7 +15,7 @@ const MyPageOption = ({ changePage }) => {
       <p
         onClick={handleChangeOrderDetail}
         className={
-          active ? "pb-1 mb-2 border-b-3 border-blue font-bold" : "pb-1 mb-2"
+          active ? "pb-1 mb-2 border-b-3 border-blue font-bold" : "pb-2 mb-2"
         }
       >
         회원정보
@@ -23,7 +23,7 @@ const MyPageOption = ({ changePage }) => {
       <p
         onClick={handleChangeUserInfo}
         className={
-          active ? "pb-1 mb-2" : "pb-1 mb-2 border-b-3 border-blue font-bold"
+          active ? "pb-2 mb-2" : "pb-1 mb-2 border-b-3 border-blue font-bold"
         }
       >
         주문내역

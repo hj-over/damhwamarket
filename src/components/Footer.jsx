@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="border-2 border-gray-200">
+    <div className="border-t-2 border-gray-200">
       <footer className="footer flex ml-10 my-10 ">
         <div className="grid wrapper">
           <b className="text-lg"> 별별컴퍼니 주식회사 </b>
           <br />
-          <div className="grid gap-y-3 text-sm mb-8">
+          <div className="grid gap-y-3 text-sm pb-8">
             고객센터: 010-1010-1010 <br />
             평일 10:00 - 18:00, 주말 휴무
             <div>
