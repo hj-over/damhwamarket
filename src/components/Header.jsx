@@ -119,6 +119,13 @@ const Header = () => {
               </div>
             </Link>
           )}
+          <Link
+            to="/members"
+            className="ml-2 text-xl text-center rounded-md h-7 w-32 hover:bg-amber-300 hover:text-white "
+          >
+            {" "}
+            MEMBERS
+          </Link>
         </div>
       </div>
     </div>
