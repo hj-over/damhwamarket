@@ -61,7 +61,7 @@ const UserInfo = () => {
                 .then((res) => res.data.data);
         }
     );
-  console.log(coupons);
+  // console.log(coupons);
   const { data: mileage } = useQuery(
     ["mileage", user && user.nickname],
     async () => {
@@ -75,8 +75,7 @@ const UserInfo = () => {
         .then((res) => res.data.data);
     }
   );
-  let milageTotal = 0;
-  console.log(mileage);
+  // console.log(mileage);
   return (
     <>
       <div className="pl-56 w-5/6 min-h-1/2 mb-28">

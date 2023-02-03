@@ -51,7 +51,7 @@ const Basket = () => {
         };
         return axios
             .post("http://192.168.0.203:8080/api/carts/order", body, header)
-            .then(() => console.log("결제성공"));
+            .then(() => alert("결제되었습니다."));
         // .then(() => navigate("/"));
     };
     const muHandlePay = useMutation(handlePay, {
@@ -75,7 +75,7 @@ const Basket = () => {
     };
     // 삭제 실행후 다시 계산
     const deleteCartCount = (_seqId) => {
-        console.log("삭제", _seqId);
+        // console.log("삭제", _seqId);
         const tempArr = [...cartsOrigin];
         let newArr = [];
         newArr = tempArr.filter((item) => item.optionSeq !== _seqId);
@@ -89,6 +89,7 @@ const Basket = () => {
         });
         setTotalPrice(totalMoney);
     }, [cartsOrigin]);
+    // console.log(coupons);
 
     return (
         <div className="flex max-w-screen-xl mx-auto ">
@@ -118,7 +119,7 @@ const Basket = () => {
                         <option>쿠폰선택</option>
                         {coupons ? (
                             coupons.map((coupon) => (
-                                <option key={coupon.seq}>
+                                <option key={coupon.couponSeq}>
                                     {coupon.couName}
                                 </option>
                             ))

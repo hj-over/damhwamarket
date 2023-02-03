@@ -122,9 +122,9 @@ const BasketCard = ({ cart, updateCartCount, deleteCartCount }) => {
               </div>
             </div>
           </div>
-          <div className="flex gap-14 justify-end items-center mr-6">
+          <div className="flex gap-12 justify-end items-center mr-14">
             <p className="font-extrabold text-xl">
-              수량: {quantity}개 / {quantity * optionPrice}원
+              수량: {quantity}개 &nbsp;&nbsp; / &nbsp;&nbsp;{quantity * optionPrice}원
             </p>
 
             <div className="flex items-center justify-center h-11 border rounded-sm text-xs font-extrabold text-center leading-44">
