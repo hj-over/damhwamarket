@@ -3,11 +3,11 @@ import React from "react";
 const Members = () => {
   return (
     <div className="max-w-screen-xl mx-auto ">
-      <p className="text-center text-5xl font-extrabold text-amber-400 py-20 pl-20 uppercase">
+      <p className="text-center text-5xl font-extrabold text-amber-400 py-16 pl-20 uppercase">
         Members
       </p>
       <div className="ml-20 mt-2">
-        <h2 className="text-3xl font-extrabold my-8 text-sky-400 uppercase">
+        <h2 className="text-3xl font-extrabold my-6 text-sky-400 uppercase">
           Front&#09;&#124;
         </h2>
         <div className="flex gap-x-24 text-lg font-semibold">
@@ -42,11 +42,11 @@ const Members = () => {
             dhfldhs0707@gmail.com
           </p>
         </div>
-        <p className="mt-24 border-2 border-sky-100"></p>
-        <h2 className="text-3xl font-extrabold pt-16 my-8 text-sky-400 uppercase">
+        <p className="mt-20 border-2 border-sky-100"></p>
+        <h2 className="text-3xl font-extrabold my-8 text-sky-400 uppercase">
           Back&#09;&#124;
         </h2>
-        <div className="flex gap-x-28 justify-center text-lg font-semibold mb-10">
+        <div className="flex gap-x-28 justify-center text-lg font-semibold mb-14">
           <p className="text-center">
             <img
               className="h-48 w-48 rounded-full mb-3 drop-shadow-lg "

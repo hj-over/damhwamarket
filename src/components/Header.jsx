@@ -111,10 +111,19 @@ const Header = () => {
             <Link to="/mypage">
               <div className="grid grid-cols-2">
                 <BsPersonCircle className="w-full h-8" />
-                {user && <p className="w-full h-8 pt-1 text-fs18">{user.nickname}</p>}
-                </div>
+                {user && (
+                  <p className="w-full h-8 pt-1 text-fs18">{user.nickname}</p>
+                )}
+              </div>
             </Link>
           )}
+          <Link
+            to="/members"
+            className="ml-2 text-xl text-center rounded-md h-7 w-32 hover:bg-amber-300 hover:text-white "
+          >
+            {" "}
+            MEMBERS
+          </Link>
         </div>
       </div>
     </div>
