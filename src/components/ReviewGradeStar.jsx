@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 function ReviewGradeStar({ star, size }) {
   // console.log(star, size);
   const AVR_RATE = star * 20;
-  const STAR_IDX_ARR = ["first", "second", "third", "fourth", "last"];
+  // const STAR_IDX_ARR = ["first", "second", "third", "fourth", "last"];
   const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
   const calcStarRates = () => {
     let tempStarRatesArr = [0, 0, 0, 0, 0];
@@ -23,7 +23,7 @@ function ReviewGradeStar({ star, size }) {
   }, []);
   return (
     <StarRateWrap>
-      {STAR_IDX_ARR.map((item, idx) => {
+      {ratesResArr.map((item, idx) => {
         return (
           <span className="star_icon" key={`${item}_${idx}`}>
             <svg

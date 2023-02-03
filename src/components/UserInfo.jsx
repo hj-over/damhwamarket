@@ -3,9 +3,8 @@ import { useAuthContext } from "../context/AuthContext";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-
 const UserInfo = () => {
-  const { Authorization, setUser } = useAuthContext();
+  const { Authorization, setUser, user } = useAuthContext();
   const [loginUser, setLoginUser] = useState({});
   const navigate = useNavigate();
   const handelChange = (e) => {
@@ -41,32 +40,34 @@ const UserInfo = () => {
       .then(() => navigate("/login"))
       .catch((err) => console.log(err));
   };
-  // const { data: coupons } = useQuery(
-  //     ["coupons", user && user.nickname],
-  //     async () => {
-  //         const header = {
-  //             headers: {
-  //                 Authorization,
-  //             },
-  //         };
-  //         return axios
-  //             .get("http://192.168.0.203:8080/api/coupons", header)
-  //             .then((res) => console.log(res));
-  //     }
-  // );
-  // const { data: mileage } = useQuery(
-  //     ["mileage", user && user.nickname],
-  //     async () => {
-  //         const header = {
-  //             headers: {
-  //                 Authorization,
-  //             },
-  //         };
-  //         return axios
-  //             .get("http://192.168.0.203:8080/api/mileage", header)
-  //             .then((res) => console.log(res));
-  //     }
-  // );
+  const { data: coupons } = useQuery(
+    ["coupons", user && user.nickname],
+    async () => {
+      const header = {
+        headers: {
+          Authorization,
+        },
+      };
+      return axios
+        .get("http://192.168.0.203:8080/api/coupons", header)
+        .then((res) => res.data.data);
+    }
+  );
+  const { data: mileage } = useQuery(
+    ["mileage", user && user.nickname],
+    async () => {
+      const header = {
+        headers: {
+          Authorization,
+        },
+      };
+      return axios
+        .get("http://192.168.0.203:8080/api/mileage", header)
+        .then((res) => res.data.data);
+    }
+  );
+  let milageTotal = 0;
+  console.log(mileage);
   return (
     <>
       <div className="pl-56 w-5/6 min-h-1/2">
@@ -113,15 +114,16 @@ const UserInfo = () => {
         </p>
         <div className="flex flex-col border-2 rounded-md p-8 text-center">
           <p className="w-full font-semibold text-center mb-3">쿠폰</p>
-          <input
-            className="bg-slate-200 rounded shadow-inner text-center h-10 mb-7"
-            type="text"
-          />
+          <ul>
+            {coupons &&
+              coupons.map((coupon) => (
+                <li>
+                  <p>{coupon.couName}</p>
+                </li>
+              ))}
+          </ul>
           <p className="w-full font-semibold text-center mb-3">마일리지</p>
-          <input
-            className="bg-slate-200 rounded shadow-inner text-center h-10 mb-7"
-            type="text"
-          />
+          <p>{mileage && mileage[0].mpPrice}</p>
         </div>
       </div>
     </>
