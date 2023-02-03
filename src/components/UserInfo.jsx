@@ -4,55 +4,63 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 const UserInfo = () => {
-  const { Authorization, setUser, user } = useAuthContext();
-  const [loginUser, setLoginUser] = useState({});
-  const navigate = useNavigate();
-  const handelChange = (e) => {
-    const { name, value } = e.target;
-    setLoginUser({ ...loginUser, [name]: value });
-  };
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const body = {
-      pwd: loginUser.pwd,
-      nickname: loginUser.nickname,
-      address: loginUser.address,
+    const { Authorization, setUser, user } = useAuthContext();
+    const [loginUser, setLoginUser] = useState({});
+    const navigate = useNavigate();
+    const handelChange = (e) => {
+        const { name, value } = e.target;
+        setLoginUser({ ...loginUser, [name]: value });
     };
-    const header = {
-      headers: {
-        Authorization,
-      },
-    };
-    axios
-      .put("http://192.168.0.203:8080/api/users/login/update", body, header)
-      .then((res) => console.log(res.data))
-      .then(() => {
-        const body = {};
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        const body = {
+            pwd: loginUser.pwd,
+            nickname: loginUser.nickname,
+            address: loginUser.address,
+        };
         const header = {
-          headers: {
-            Authorization,
-          },
+            headers: {
+                Authorization,
+            },
         };
         axios
-          .post(`http://192.168.0.203:8080/api/users/logout`, body, header)
-          .then(() => setUser());
-      })
-      .then(() => navigate("/login"))
-      .catch((err) => console.log(err));
-  };
-  const { data: coupons } = useQuery(
-    ["coupons", user && user.nickname],
-    async () => {
-      const header = {
-        headers: {
-          Authorization,
-        },
-      };
-      return axios
-        .get("http://192.168.0.203:8080/api/coupons", header)
-        .then((res) => res.data.data);
-    }
-  );
+            .put(
+                "http://192.168.0.203:8080/api/users/login/update",
+                body,
+                header
+            )
+            .then((res) => console.log(res.data))
+            .then(() => {
+                const body = {};
+                const header = {
+                    headers: {
+                        Authorization,
+                    },
+                };
+                axios
+                    .post(
+                        `http://192.168.0.203:8080/api/users/logout`,
+                        body,
+                        header
+                    )
+                    .then(() => setUser());
+            })
+            .then(() => navigate("/login"))
+            .catch((err) => console.log(err));
+    };
+    const { data: coupons } = useQuery(
+        ["coupons", user && user.nickname],
+        async () => {
+            const header = {
+                headers: {
+                    Authorization,
+                },
+            };
+            return axios
+                .get("http://192.168.0.203:8080/api/coupons", header)
+                .then((res) => res.data.data);
+        }
+    );
   console.log(coupons);
   const { data: mileage } = useQuery(
     ["mileage", user && user.nickname],
@@ -133,5 +141,6 @@ const UserInfo = () => {
       </div>
     </>
   );
+
 };
 export default UserInfo;
