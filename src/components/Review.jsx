@@ -1,20 +1,23 @@
 import React from "react";
+import ReviewGradeStar from "./ReviewGradeStar";
 
 const Review = ({
   review: { nickname, grade, content, regDt, optionName },
 }) => {
-
+  // console.log(grade);
   return (
     <li>
       <div className="flex justify-between bg-slate-100 rounded-lg py-3 px-6">
         {nickname}
-        <div className="flex justify-between w-filterwidth">
+        <div className="flex justify-between items-center w-filterwidth">
           <span>
             {optionName.length < 15
               ? optionName
               : optionName.slice(0, 15) + "..."}
           </span>
-          <span>{grade}</span>
+          <span>
+            <ReviewGradeStar star={grade} size={15} />
+          </span>
           <span>{new Intl.DateTimeFormat("kr").format(new Date(regDt))}</span>
         </div>
       </div>

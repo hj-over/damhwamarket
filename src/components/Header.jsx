@@ -44,7 +44,7 @@ const Header = () => {
           })
           .then((res) => res.data.data)
           .catch((err) => console.log(err))
-      : "";
+      : null;
   });
 
   return (
@@ -71,12 +71,12 @@ const Header = () => {
         </div>
         <div className="relative flex items-center mb-5">
           {user === undefined && (
-            <Link to="/login" className="mr-7 text-fs18">
+            <Link to="/login" className="mr-11 text-fs18">
               로그인
             </Link>
           )}
           {user === undefined && (
-            <Link to="/signup" className="mr-2 text-fs18">
+            <Link to="/signup" className="mr-14 text-fs18">
               회원가입
             </Link>
           )}
@@ -102,7 +102,7 @@ const Header = () => {
           )}
           {user && carts && (
             <Link to="/basket">
-              <div className="absolute left-100px top-0 w-7 h-7 bg-red-400 rounded-full text-center align-middle text-white font-extrabold text-sm pt-1">
+              <div className="absolute left-107px -top-1 w-7 h-7 bg-red-400 rounded-full text-center align-middle text-white font-extrabold text-sm pt-1">
                 {carts.length}
               </div>
             </Link>
@@ -112,7 +112,9 @@ const Header = () => {
               <div className="grid grid-cols-2">
                 <BsPersonCircle className="w-full h-8" />
                 {user && (
-                  <p className="w-full h-8 pt-1 text-fs18">{user.nickname}</p>
+                  <p className="w-full h-8 pt-1 ml-1 text-fs18">
+                    {user.nickname}
+                  </p>
                 )}
               </div>
             </Link>
