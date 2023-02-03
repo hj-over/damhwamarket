@@ -60,6 +60,9 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 ![thymeleaf](https://img.shields.io/badge/thymeleaf-005F0F.svg?style=for-the-badge&logo=thymeleaf&logoColor=white&logoWidth=20)
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white&logoWidth=20)
 
+![QueryDSL](https://img.shields.io/badge/QueryDSL-0769AD.svg?style=for-the-badge&logo=QueryDSL&logoColor=white&logoWidth=20)
+![JPA](https://img.shields.io/badge/JPA-02303A.svg?style=for-the-badge&logo=JPA&logoColor=white&logoWidth=20)
+
 #### 코드 및 버전관리
 ![github](https://img.shields.io/badge/github-181717.svg?style=for-the-badge&logo=github&logoColor=white&logoWidth=20)
 ![git](https://img.shields.io/badge/git-F05032.svg?style=for-the-badge&logo=git&logoColor=white&logoWidth=20)
