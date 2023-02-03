@@ -52,7 +52,7 @@ const UserInfo = () => {
         .get("http://192.168.0.203:8080/api/coupons", header)
         .then((res) => res.data.data);
     }
-  );
+  );  
   console.log(coupons);
   const { data: mileage } = useQuery(
     ["mileage", user && user.nickname],
