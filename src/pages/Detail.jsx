@@ -2,14 +2,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Review from "../components/Review";
 import ReviewGradeStar from "../components/ReviewGradeStar";
 import Spinner from "../components/Spinner";
 import { useAuthContext } from "../context/AuthContext";
 
 const Detail = () => {
-  const navigate = useNavigate();
   const { Authorization, user } = useAuthContext();
   const [isShown, setIsShown] = useState(true);
   // 선택 개수
@@ -145,11 +144,9 @@ const Detail = () => {
       },
     };
     return axios.post(`http://192.168.0.203:8080/api/carts`, body, header).then(alert("장바구니에 추가되었습니다."));
-    // .then(() => navigate("/basket"));
   };
   const muHandleUpdate = useMutation(() => handleUpdate(), {
     onSuccess: () => {
-      // navigate("/basket");
       queryClinet.invalidateQueries(["carts", user && user.nickname]);
     },
   });
