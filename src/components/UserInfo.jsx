@@ -53,6 +53,7 @@ const UserInfo = () => {
         .then((res) => res.data.data);
     }
   );
+  console.log(coupons);
   const { data: mileage } = useQuery(
     ["mileage", user && user.nickname],
     async () => {
@@ -117,7 +118,7 @@ const UserInfo = () => {
           <ul>
             {coupons &&
               coupons.map((coupon) => (
-                <li>
+                <li key={coupon.couponSeq}>
                   <p>{coupon.couName}</p>
                 </li>
               ))}
