@@ -1,11 +1,13 @@
 import React from "react";
 
 const OrderDetailPay = ({ paymentOption }) => {
-  const { optionName, price } = paymentOption;
-  return (
-    <li>
-      <p className="w-full">{`이름:${optionName} 가격:${price}`}</p>
-    </li>
-  );
+    const { optionName, price } = paymentOption;
+    return (
+        <li>
+            <p className="w-full font-extrabold mt-2">
+                선택옵션 : <span className="font-normal">{optionName}</span>
+            </p>
+        </li>
+    );
 };
 export default OrderDetailPay;

@@ -23,9 +23,11 @@ const OrderDetail = () => {
     );
     // console.log(orderDetails);
     return (
-        <div className="pl-56 w-5/6 min-h-1/2 ">
-            <p className="text-4xl font-bold text-amber-400 py-14">주문내역</p>
-            <div className="flex flex-col max-h-screen ">
+        <div className="pl-56 w-5/6 min-h-1/2">
+            <p className="text-4xl font-bold text-amber-400 py-14 pl-10">
+                주문내역
+            </p>
+            <div className="flex flex-col max-h-screen overflow-y-scroll mb-10 p-10 ">
                 <div>
                     {orderDetails &&
                         orderDetails.map((orderDetail) => (
