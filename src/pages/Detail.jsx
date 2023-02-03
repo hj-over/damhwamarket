@@ -1,26 +1,53 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Review from "../components/Review";
 import ReviewGradeStar from "../components/ReviewGradeStar";
 import Spinner from "../components/Spinner";
 import { useAuthContext } from "../context/AuthContext";
 
 const Detail = () => {
-  const { Authorization } = useAuthContext();
+  const navigate = useNavigate();
+  const { Authorization, user } = useAuthContext();
   const [isShown, setIsShown] = useState(true);
-  const [x, setX] = useState(1);
+  // 선택 개수
+  const [count, setCount] = useState(1);
+  // 옵션 가격
+  const [optPrice, setOptPrice] = useState(0);
 
   const [reviewOptionName, setReviewOptionName] = useState("");
   const [reviewGrade, setReviewGrade] = useState();
   const [reviewContent, setReviewContent] = useState("");
-  const [reviewRegDt, setReviewRegDt] = useState("");
-  console.log(reviewOptionName, reviewGrade, reviewContent, reviewRegDt);
+  // console.log(reviewOptionName, reviewGrade, reviewContent);
 
-  const [selectIndex, setSelectIndex] = useState();
+  const [selectIndex, setSelectIndex] = useState(0);
+  // 옵션 선택시 처리
+  useEffect(() => {
+    if (!isLoading) {
+      // 카운터 갯수 초기화
+      if (selectIndex === 0) {
+        setCount(0);
+        setOptPrice(0 * count);
+      } else {
+        setCount(1);
+        setOptPrice(productDetail.options[selectIndex - 1].price * count);
+      }
+    }
+  }, [selectIndex]);
 
+  // 갯수 변경시 처리
+  useEffect(() => {
+    if (!isLoading) {
+      if (selectIndex === 0) {
+        setOptPrice(0 * count);
+      } else {
+        setOptPrice(productDetail.options[selectIndex - 1].price * count);
+      }
+    }
+  }, [count]);
+  const queryClinet = useQueryClient();
   const { productId } = useParams();
   // console.log(productId);
   const {
@@ -33,62 +60,99 @@ const Detail = () => {
       .then((res) => res.data.data)
       .catch((err) => console.log(err));
   });
-  const { data: reviews } = useQuery(["products", productId], async () => {
+
+  const { data: reviews } = useQuery(["reviews", productId], async () => {
     return axios
       .get(`http://192.168.0.203:8080/api/reviews/${productId}`)
       .then((res) => res.data)
       .catch((err) => console.log(err));
   });
   // console.log(reviews);
-  console.log(productDetail);
+  // console.log(productDetail);
 
   const handleClick = (event) => {
     setIsShown((current) => !current);
   };
 
-  const handlePlus = () => setX(x + 1);
+  const handlePlus = () => {
+    if (selectIndex === 0) {
+      return alert("옵션에서 상품을 선택하세요!");
+    } else {
+      setCount(count + 1);
+    }
+  };
   const handleMinus = () => {
-    if (x === 1) return;
-    setX(x - 1);
+    if (count === 1) return;
+
+    if (selectIndex === 0) {
+      return alert("옵션에서 상품을 선택하세요!");
+    } else {
+      setCount(count - 1);
+    }
   };
 
   // 리뷰 등록
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
     const body = {
-      productSeq: productId,
+      productSeq: Number(productId),
       optionName: reviewOptionName,
       grade: reviewGrade,
       content: reviewContent,
-      regDt: reviewRegDt,
     };
+    const blob = new Blob([JSON.stringify(body)], {
+      type: "application/json",
+    });
+    formData.append("body", blob);
     const header = {
       headers: {
+        "Content-Type": "multipart/form-data",
         Authorization,
       },
     };
-    axios
-      .post(`http://192.168.0.203:8080/api/reviews`, body, header)
+    return axios
+      .post(`http://192.168.0.203:8080/api/reviews`, formData, header)
       .then(console.log("리뷰등록성공"))
       .catch(console.log("리뷰등록실패"));
   };
+  const muHandleSubmit = useMutation(handleSubmit, {
+    onSuccess: () => {
+      queryClinet.invalidateQueries(["reviews", productId]);
+    },
+  });
+  console.log(typeof reviewGrade);
   // console.log(new Date());
 
   // 장바구니 추가
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    console.log(productDetail.options[0]);
+  const handleUpdate = async () => {
+    if (selectIndex === 0) {
+      return alert("상품을 선택하세요!");
+    }
+
+    if (user == null) {
+      alert("로그인해 주세요!");
+    }
+
+    // console.log(productDetail.options[selectIndex - 1]);
     const body = {
-      optionSeq: productDetail && productDetail.options[selectIndex].seq,
-      quantity: x,
+      optionSeq: productDetail && productDetail.options[selectIndex - 1].seq,
+      quantity: count,
     };
     const header = {
       headers: {
         Authorization,
       },
     };
-    axios.post(`http://192.168.0.203:8080/api/carts`, body, header);
+    return axios.post(`http://192.168.0.203:8080/api/carts`, body, header);
+    // .then(() => navigate("/basket"));
   };
+  const muHandleUpdate = useMutation(() => handleUpdate(), {
+    onSuccess: () => {
+      queryClinet.invalidateQueries(["carts", user && user.nickname]);
+      // navigate("/basket");
+    },
+  });
   // console.log(productDetail.options);
   // console.log(reviewContent);
   useEffect(() => {
@@ -164,7 +228,7 @@ const Detail = () => {
               </button>
             </div>
             <div>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={muHandleSubmit.mutate}>
                 <label>옵션이름</label>
                 <input
                   type="text"
@@ -175,10 +239,10 @@ const Detail = () => {
 
                 <label>별점</label>
                 <input
-                  type="number"
+                  type="text"
                   name="grade"
                   value={reviewGrade}
-                  onChange={(e) => setReviewGrade(e.target.value)}
+                  onChange={(e) => setReviewGrade(parseInt(e.target.value))}
                 />
 
                 <label>내용</label>
@@ -189,13 +253,6 @@ const Detail = () => {
                   onChange={(e) => setReviewContent(e.target.value)}
                 />
 
-                <label>날짜</label>
-                <input
-                  type="date"
-                  name="regDt"
-                  value={reviewRegDt}
-                  onChange={(e) => setReviewRegDt(e.target.value)}
-                />
                 <button>등록</button>
               </form>
               <ul>
@@ -215,13 +272,14 @@ const Detail = () => {
               <label className="mb-2.5 text-fs15 font-extrabold">옵션</label>
               <select
                 className="mb-6 w-full h-11 pr border rounded-sm text-xs text-center focus:outline-none"
-                onChange={(e) =>
-                  setSelectIndex(e.currentTarget.selectedIndex - 1)
-                }
+                onChange={(e) => setSelectIndex(e.currentTarget.selectedIndex)}
               >
                 <option className="text-sm">어떤 옵션을 원하시나요?</option>
                 {productDetail.options.map((option) => (
-                  <option key={option.seq}>{option.name}</option>
+                  <option key={option.seq} value={option.price}>
+                    {option.name}
+                    {option.price}
+                  </option>
                 ))}
               </select>
 
@@ -230,7 +288,7 @@ const Detail = () => {
                 <div className="flex w-full items-center justify-center">
                   <img
                     src={
-                      x === 1
+                      count === 1
                         ? "/images/icon-minus.png"
                         : "/images/icon-minus-active.png"
                     }
@@ -241,7 +299,7 @@ const Detail = () => {
                 </div>
 
                 <div className="w-full h-full text-center pl-7 pr-7 border-x text-fs14 text-zinc-600 focus:outline-none">
-                  {x}
+                  {count}
                 </div>
 
                 <div className="flex w-full items-center justify-center">
@@ -258,9 +316,7 @@ const Detail = () => {
                 총 상품가격
               </label>
               <span className="w-full h-11 mb-6 border rounded-sm text-xs font-extrabold text-center leading-44">
-                {productDetail.options[0].price *
-                  x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                원
+                {optPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
               </span>
 
               <div
@@ -281,7 +337,7 @@ const Detail = () => {
               <div className="flex mb-3">
                 <button
                   className="flex mr-2 items-center justify-center w-buttonwidth h-12 border-slate-300 border rounded-md text-lg font-extrabold text-zinc-600 text-center hover:bg-gray-100 transition ease-in"
-                  onClick={handleUpdate}
+                  onClick={muHandleUpdate.mutate}
                 >
                   <img
                     src="/images/icon-cart.png"
