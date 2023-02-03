@@ -13,6 +13,8 @@ const BasketCard = ({ cart, updateCartCount, deleteCartCount }) => {
     optionPrice,
   } = cart;
 
+  let totalPrice = quantity * optionPrice;
+
   const { Authorization, user } = useAuthContext();
   const queryClinet = useQueryClient();
 
@@ -124,7 +126,7 @@ const BasketCard = ({ cart, updateCartCount, deleteCartCount }) => {
           </div>
           <div className="flex gap-12 justify-end items-center mr-14">
             <p className="font-extrabold text-xl">
-              수량: {quantity}개 &nbsp;&nbsp; / &nbsp;&nbsp;{quantity * optionPrice}원
+              수량: {quantity}개 &nbsp;&nbsp; / &nbsp;&nbsp;{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
             </p>
 
             <div className="flex items-center justify-center h-11 border rounded-sm text-xs font-extrabold text-center leading-44">
@@ -155,7 +157,7 @@ const BasketCard = ({ cart, updateCartCount, deleteCartCount }) => {
               </div>
             </div>
             <button
-              className="w-16 h-10 border"
+              className="w-16 h-10 border hover:bg-gray-100 transition ease-in"
               onClick={muHandleDelete.mutate}
             >
               삭제
