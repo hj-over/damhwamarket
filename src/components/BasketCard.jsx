@@ -83,7 +83,7 @@ const BasketCard = ({ cart, updateCartCount, deleteCartCount }) => {
     };
     return axios
       .delete(`http://192.168.0.203:8080/api/carts?seq=${optionSeq}`, header)
-      .then(() => console.log("삭제"));
+      .then(() => alert("삭제되었습니다."));
   };
 
   const muHandleDelete = useMutation(handleDelete, {
@@ -95,28 +95,40 @@ const BasketCard = ({ cart, updateCartCount, deleteCartCount }) => {
   return (
     <div className="flex flex-col max-h-screen ">
       <div>
-        <div className="flex w-full border-3 border-red-200 p-6 rounded-xl mb-6">
-          <img
-            className="w-32 h-32"
-            src={`http://192.168.0.203:8080${thumbImg}`}
-            alt="제품이미지"
-          />
-          <div className="pl-6 pt-3 text-lg">
-            <div className="flex mb-3">
-              <p className="pr-14 font-bold">제품</p>
-              <p>{productName}</p>
+        <div className="grid grid-cols-1 w-full border-3 border-red-200 p-6 rounded-xl mb-6">
+          <div className="flex mb-5">
+            <img
+              className="w-32 h-32"
+              src={`http://192.168.0.203:8080${thumbImg}`}
+              alt="제품이미지"
+            />
+            <div className="pl-6 pt-3 text-lg">
+              <div className="flex mb-3">
+                <p className="pr-16 font-bold">제품</p>
+                <p>{productName}</p>
+              </div>
+              <div className="flex mb-3">
+                <p className="pr-6 font-bold">선택 옵션</p>
+                <p>
+                  {optionName} {/* {optionSeq}번 */}
+                </p>
+              </div>
+              <div className="flex mb-3">
+                <p className="pr-16 font-bold">가격</p>
+                <p>
+                  {optionPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  원
+                </p>
+              </div>
             </div>
-            <div className="flex mb-3">
-              <p className="pr-4 font-bold">선택 옵션</p>
-              <p>
-                {optionName}/{optionPrice}/{optionSeq}번
-              </p>
-            </div>
-            <p className="font-extrabold text-right">
+          </div>
+          <div className="flex gap-14 justify-end items-center mr-6">
+            <p className="font-extrabold text-xl">
               수량: {quantity}개 / {quantity * optionPrice}원
             </p>
-            <div className="flex items-center justify-center w-full h-11 mb-6 border rounded-sm text-xs font-extrabold text-center leading-44">
-              <div className="flex w-full items-center justify-center">
+
+            <div className="flex items-center justify-center h-11 border rounded-sm text-xs font-extrabold text-center leading-44">
+              <div className="flex justify-center w-16">
                 <img
                   src={
                     quantity === 1
@@ -129,11 +141,11 @@ const BasketCard = ({ cart, updateCartCount, deleteCartCount }) => {
                 />
               </div>
 
-              <div className="w-full h-full text-center pl-7 pr-7 border-x text-fs14 text-zinc-600 focus:outline-none">
+              <div className="w-20 h-full text-center border-x text-fs14 text-zinc-600 focus:outline-none">
                 {quantity}
               </div>
 
-              <div className="flex w-full items-center justify-center">
+              <div className="flex justify-center w-16">
                 <img
                   src="/images/icon-plus.png"
                   alt="플러스"
@@ -142,8 +154,11 @@ const BasketCard = ({ cart, updateCartCount, deleteCartCount }) => {
                 />
               </div>
             </div>
-            <button className="border" onClick={muHandleDelete.mutate}>
-              삭제버튼
+            <button
+              className="w-16 h-10 border"
+              onClick={muHandleDelete.mutate}
+            >
+              삭제
             </button>
           </div>
         </div>
