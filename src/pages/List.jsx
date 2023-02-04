@@ -33,7 +33,20 @@ const List = () => {
         productsSearchQuery: { isLoading, error, data: products },
     } = useProducts(category);
 
-    const navLists = ["전체보기", "탁주", "약.청주", "과실주", "증류주"];
+    // const navLists = [
+    //     ["전체보기", undefined],
+    //     "전체보기",
+    //     "탁주",
+    //     "약.청주",
+    //     "과실주",
+    //     "증류주",
+    // ];
+    const navLists = [
+        ["탁주", "막걸리"],
+        ["약.청주", "청주"],
+        ["과실주", "와인"],
+        ["증류주", "소주"],
+    ];
 
     const [categoryBtNames, setCategoryBtNames] = useState([
         {
@@ -198,7 +211,7 @@ const List = () => {
                 </div>
             </div>
             {isLoading && <Spinner />}
-            {error && <ErrorPage/>}
+            {error && <ErrorPage />}
             {products && (
                 <div className="grid grid-cols-4 max-w-screen-xl m-auto">
                     {products.map((item, index) => (
