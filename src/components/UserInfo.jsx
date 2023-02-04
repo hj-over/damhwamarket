@@ -5,6 +5,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useMileage from "../hooks/useMileage";
 import useCoupons from "../hooks/useCoupons";
+import Spinner from "./Spinner";
+import ErrorPage from "../pages/ErrorPage";
 const UserInfo = () => {
     const { Authorization, setUser, user } = useAuthContext();
     const [loginUser, setLoginUser] = useState({});
@@ -51,7 +53,7 @@ const UserInfo = () => {
             .catch((err) => console.log(err));
     };
     const {
-        couponsQuery: { data: coupons },
+        couponsQuery: { isLoading: couLoading, error: couError, data: coupons },
     } = useCoupons();
     // const { data: coupons } = useQuery(
     //     ["coupons", user && user.nickname],
@@ -68,7 +70,7 @@ const UserInfo = () => {
     // );
     // console.log(coupons);
     const {
-        mileageQuery: { data: mileage },
+        mileageQuery: { isLoading, error, data: mileage },
     } = useMileage();
     // console.log(mileage);
     return (
@@ -122,6 +124,8 @@ const UserInfo = () => {
                         쿠폰&#32;&#32;&#124;
                     </p>
                     <ul>
+                        {couLoading && <Spinner/>}
+                        {couError && <ErrorPage/>}
                         {coupons &&
                             coupons.map((coupon) => (
                                 <li key={coupon.couponSeq}>
@@ -132,7 +136,10 @@ const UserInfo = () => {
                     <p className="w-full text-lg font-bold my-3">
                         마일리지&#32;&#32;&#124;
                     </p>
-                    <p>{mileage && mileage[0].mpPrice}</p>
+                    <p>
+                        {isLoading && <Spinner/>}
+                        {error && <ErrorPage/>}
+                        {mileage && mileage[0].mpPrice}</p>
                 </div>
             </div>
         </>
