@@ -16,53 +16,57 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Main from "./components/Main";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <Main />,
-      },
-      {
-        path: "listing/:category",
-        element: <List />,
-      },
-      {
-        path: "detail/:productId",
-        element: <Detail />,
-      },
-      {
-        path: "login",
-        element: <LogIn />,
-      },
-      {
-        path: "signup",
-        element: <SignUp />,
-      },
-      {
-        path: "mypage",
-        element: <MyPage />,
-      },
-      {
-        path: "basket",
-        element: <Basket />,
-      },
-    ],
-  },
-  {
-    path: "/members",
-    element: <Members />,
-  },
+    {
+        path: "/",
+        element: <App />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                index: true,
+                element: <Main />,
+            },
+            {
+                path: "listing",
+                element: <List />,
+            },
+            {
+                path: "listing/:category",
+                element: <List />,
+            },
+            {
+                path: "detail/:productId",
+                element: <Detail />,
+            },
+            {
+                path: "login",
+                element: <LogIn />,
+            },
+            {
+                path: "signup",
+                element: <SignUp />,
+            },
+            {
+                path: "mypage",
+                element: <MyPage />,
+            },
+            {
+                path: "basket",
+                element: <Basket />,
+            },
+        ],
+    },
+    {
+        path: "/members",
+        element: <Members />,
+    },
 ]);
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <React.StrictMode>
-  <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
-  </QueryClientProvider>
-  // </React.StrictMode>
+    // <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+    </QueryClientProvider>
+    // </React.StrictMode>
 );

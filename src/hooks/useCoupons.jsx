@@ -1,9 +1,8 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuthContext } from "../context/AuthContext";
 
 export default function useCoupons() {
-    const queryClient = useQueryClient();
     const { Authorization, user } = useAuthContext();
     const couponsQuery = useQuery(
         ["coupons", user && user.nickname],
@@ -16,7 +15,8 @@ export default function useCoupons() {
             return axios
                 .get("http://192.168.0.203:8080/api/coupons", header)
                 .then((res) => res.data.data);
-        }
+        },
+        { staleTime: 1000 * 60 * 5 }
     );
 
     return { couponsQuery };
