@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -8,27 +8,32 @@ import ListItem from "../components/ListItem";
 import NavList from "../components/NavList";
 import Spinner from "../components/Spinner";
 import { v4 as uuidv4 } from "uuid";
+import useProducts from "../hooks/useProducts";
 // http://192.168.0.203:8080/api/products/categories?keyword=${keyword}
 // takju chungju soju wine
 const List = () => {
     const [filter, setFilter] = useState([]);
     const { category } = useParams();
+    // const {
+    //     isLoading,
+    //     error,
+    //     data: products,
+    // } = useQuery(["products", category], async () => {
+    //     return axios
+    //         .get(
+    //             category === "전체보기"
+    //                 ? `http://192.168.0.203:8080/api/products`
+    //                 : `http://192.168.0.203:8080/api/products?keyword=${category}`
+    //         )
+    //         .then((res) => res.data.content)
+    //         .catch((err) => console.log(err));
+    // });
     const {
-        isLoading,
-        error,
-        data: products,
-    } = useQuery(["products", category], async () => {
-        return axios
-            .get(
-                category === "전체보기"
-                    ? `http://192.168.0.203:8080/api/products`
-                    : `http://192.168.0.203:8080/api/products?keyword=${category}`
-            )
-            .then((res) => res.data.content)
-            .catch((err) => console.log(err));
-    });
+        productsSearchQuery: { isLoading, error, data: products },
+    } = useProducts(category);
+
     const navLists = ["전체보기", "탁주", "약.청주", "과실주", "증류주"];
-    const navSearch = ["전체보기", "막걸리", "청주", "와인", "소주"];
+
     const [categoryBtNames, setCategoryBtNames] = useState([
         {
             name: "도수",
