@@ -6,6 +6,8 @@ import { BsPersonCircle } from "react-icons/bs";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useCarts from "../hooks/useCarts";
+import Spinner from "./Spinner";
+import ErrorPage from "../pages/ErrorPage";
 const Header = () => {
     const { Authorization, user, setUser } = useAuthContext();
     const [text, setText] = useState("");
@@ -34,7 +36,7 @@ const Header = () => {
 
     // 비로그인시 비활성화
     const {
-        cartsQuery: { data: carts },
+        cartsQuery: { isLoading, error, data: carts },
     } = useCarts();
 
     return (
@@ -90,6 +92,8 @@ const Header = () => {
                             />
                         </Link>
                     )}
+                    {user && isLoading && <Spinner/>}
+                    {user && error && <ErrorPage/>}
                     {user && carts && (
                         <Link to="/basket">
                             <div className="absolute left-107px -top-1 w-7 h-7 bg-red-400 rounded-full text-center align-middle text-white font-extrabold text-sm pt-1">

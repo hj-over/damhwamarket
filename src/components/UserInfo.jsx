@@ -139,7 +139,8 @@ const UserInfo = () => {
                     <p>
                         {isLoading && <Spinner/>}
                         {error && <ErrorPage/>}
-                        {mileage && mileage[0].mpPrice}</p>
+                        {mileage && mileage[0].mpPrice}
+                    </p>
                 </div>
             </div>
         </>

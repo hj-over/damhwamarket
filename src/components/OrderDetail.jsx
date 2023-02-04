@@ -4,13 +4,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useOrderDetail from "../hooks/useOrderDetail";
+import ErrorPage from "../pages/ErrorPage";
 import OrderDetailCard from "./OrderDetailCard";
+import Spinner from "./Spinner";
 
 const OrderDetail = () => {
     const navigate = useNavigate();
     // const { Authorization, user } = useAuthContext();
     const {
-        orderDetaiQuery: { data: orderDetails },
+        orderDetaiQuery: { isLoading, error, data: orderDetails },
     } = useOrderDetail();
     // const { data: orderDetails } = useQuery(
     //     ["orderDetail", user && user.nickname],
@@ -33,6 +35,8 @@ const OrderDetail = () => {
             </p>
             <div className="flex flex-col max-h-screen overflow-y-scroll mb-10 p-10 ">
                 <div>
+                    {isLoading && <Spinner/>}
+                    {error && <ErrorPage/>}
                     {orderDetails &&
                         orderDetails.map((orderDetail) => (
                             <OrderDetailCard
