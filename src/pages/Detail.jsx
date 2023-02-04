@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Review from "../components/Review";
 import ReviewGradeStar from "../components/ReviewGradeStar";
 import Spinner from "../components/Spinner";
+import WriteReview from "../components/WriteReview";
 import { useAuthContext } from "../context/AuthContext";
 import useProducts from "../hooks/useProducts";
 import useReviews from "../hooks/useReviews";
@@ -18,11 +19,6 @@ const Detail = () => {
   const [count, setCount] = useState(1);
   // 옵션 가격
   const [optPrice, setOptPrice] = useState(0);
-
-  const [reviewOptionName, setReviewOptionName] = useState("");
-  const [reviewGrade, setReviewGrade] = useState();
-  const [reviewContent, setReviewContent] = useState("");
-  // console.log(reviewOptionName, reviewGrade, reviewContent);
 
   const [selectIndex, setSelectIndex] = useState(0);
   // 옵션 선택시 처리
@@ -98,38 +94,6 @@ const Detail = () => {
       setCount(count - 1);
     }
   };
-
-  // 리뷰 등록
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    const body = {
-      productSeq: Number(productId),
-      optionName: reviewOptionName,
-      grade: reviewGrade,
-      content: reviewContent,
-    };
-    const blob = new Blob([JSON.stringify(body)], {
-      type: "application/json",
-    });
-    formData.append("body", blob);
-    const header = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization,
-      },
-    };
-    return axios
-      .post(`http://192.168.0.203:8080/api/reviews`, formData, header)
-      .then(alert("리뷰등록성공"));
-  };
-  const muHandleSubmit = useMutation(handleSubmit, {
-    onSuccess: () => {
-      queryClinet.invalidateQueries(["reviews", productId]);
-    },
-  });
-  // console.log(typeof reviewGrade);
-  // console.log(new Date());
 
   // 장바구니 추가
   const handleUpdate = async () => {
@@ -234,44 +198,13 @@ const Detail = () => {
                 리뷰
               </button>
             </div>
-            <div>
-              <form
-                onSubmit={muHandleSubmit.mutate}
-                className="border-2 border-t-2 mb-11 w-full h-48 py-5"
-              >
-                <label>옵션이름</label>
-                <input
-                  type="text"
-                  name="optionName"
-                  value={reviewOptionName}
-                  onChange={(e) => setReviewOptionName(e.target.value)}
-                />
-
-                <label>별점</label>
-                <input
-                  type="text"
-                  name="grade"
-                  value={reviewGrade}
-                  onChange={(e) => setReviewGrade(parseInt(e.target.value))}
-                />
-
-                <label>내용</label>
-                <input
-                  type="text"
-                  name="content"
-                  value={reviewContent}
-                  onChange={(e) => setReviewContent(e.target.value)}
-                />
-
-                <button>등록</button>
-              </form>
-              <ul>
-                {reviews &&
-                  reviews.data.map((review, i) => (
-                    <Review key={i} review={review} />
-                  ))}
-              </ul>
-            </div>
+            <WriteReview productId={productId} />
+            <ul>
+              {reviews &&
+                reviews.data.map((review, i) => (
+                  <Review key={i} review={review} />
+                ))}
+            </ul>
           </div>
 
           <div className="fixed right-1/4 top-32 w-rightwidth">

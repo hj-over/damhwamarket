@@ -7,21 +7,28 @@ const Review = ({
   // console.log(grade);
   return (
     <li>
-      <div className="flex justify-between bg-slate-100 rounded-lg py-3 px-6">
-        {nickname}
-        <div className="flex justify-between items-center w-filterwidth">
-          <span>
-            {optionName.length < 15
+      <div className="flex gap-4 py-10 px-6 border-b-2">
+        <img
+          src="/images/person.jpg"
+          alt="유저사진"
+          className="w-8 h-8 rounded-full"
+        />
+        <div className="flex flex-col items-start">
+          <span className="mb-2">
+            <ReviewGradeStar star={grade} size={18} />
+          </span>
+          <div className="flex gap-4 mb-1">
+            <p>{nickname}</p>
+            <span>{new Intl.DateTimeFormat("kr").format(new Date(regDt))}</span>
+          </div>
+          <span className="mb-9 font-bold">
+            {optionName.length < 41
               ? optionName
-              : optionName.slice(0, 15) + "..."}
+              : optionName.slice(0, 41) + "..."}
           </span>
-          <span>
-            <ReviewGradeStar star={grade} size={15} />
-          </span>
-          <span>{new Intl.DateTimeFormat("kr").format(new Date(regDt))}</span>
+          <div className="text-left">{content}</div>
         </div>
       </div>
-      <div className="py-6 px-7 mb-6 text-left">{content}</div>
     </li>
   );
 };
