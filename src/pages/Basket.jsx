@@ -9,6 +9,7 @@ import Spinner from "../components/Spinner";
 import { useAuthContext } from "../context/AuthContext";
 import useCarts from "../hooks/useCarts";
 import useCoupons from "../hooks/useCoupons";
+import ErrorPage from "./ErrorPage";
 
 const Basket = () => {
     const { Authorization, user } = useAuthContext();
@@ -109,7 +110,7 @@ const Basket = () => {
                         장바구니
                     </p>
                     {isLoading && <Spinner />}
-                    {error && <p>에러났어요</p>}
+                    {error && <ErrorPage/>}
                     {carts &&
                         carts.map((cart) => (
                             <BasketCard

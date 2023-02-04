@@ -9,6 +9,7 @@ import Spinner from "../components/Spinner";
 import { useAuthContext } from "../context/AuthContext";
 import useProducts from "../hooks/useProducts";
 import useReviews from "../hooks/useReviews";
+import ErrorPage from "./ErrorPage";
 
 const Detail = () => {
   const { Authorization, user } = useAuthContext();
@@ -168,7 +169,7 @@ const Detail = () => {
   return (
     <>
       {isLoading && <Spinner />}
-      {error && <p>에러났어요</p>}
+      {error && <ErrorPage />}
       {productDetail && (
         <div className="max-w-7xl pt-5 px-28 pb-64 m-auto text-center">
           <div className="w-leftwidth">
