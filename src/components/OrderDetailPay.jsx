@@ -1,7 +1,7 @@
 import React from "react";
 
 const OrderDetailPay = ({ paymentOption }) => {
-    const { optionName, price } = paymentOption;
+    const { optionName } = paymentOption;
     return (
         <li>
             <p className="w-full font-extrabold mt-2">

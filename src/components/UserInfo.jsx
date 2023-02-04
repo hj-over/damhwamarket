@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import useMileage from "../hooks/useMileage";
+import useCoupons from "../hooks/useCoupons";
 const UserInfo = () => {
     const { Authorization, setUser, user } = useAuthContext();
     const [loginUser, setLoginUser] = useState({});
@@ -49,19 +50,22 @@ const UserInfo = () => {
             .then(() => navigate("/login"))
             .catch((err) => console.log(err));
     };
-    const { data: coupons } = useQuery(
-        ["coupons", user && user.nickname],
-        async () => {
-            const header = {
-                headers: {
-                    Authorization,
-                },
-            };
-            return axios
-                .get("http://192.168.0.203:8080/api/coupons", header)
-                .then((res) => res.data.data);
-        }
-    );
+    const {
+        couponsQuery: { data: coupons },
+    } = useCoupons();
+    // const { data: coupons } = useQuery(
+    //     ["coupons", user && user.nickname],
+    //     async () => {
+    //         const header = {
+    //             headers: {
+    //                 Authorization,
+    //             },
+    //         };
+    //         return axios
+    //             .get("http://192.168.0.203:8080/api/coupons", header)
+    //             .then((res) => res.data.data);
+    //     }
+    // );
     // console.log(coupons);
     const {
         mileageQuery: { data: mileage },
