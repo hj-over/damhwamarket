@@ -1,26 +1,30 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
+// import { useAuthContext } from "../context/AuthContext";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
+import useOrderDetail from "../hooks/useOrderDetail";
 import OrderDetailCard from "./OrderDetailCard";
 
 const OrderDetail = () => {
     const navigate = useNavigate();
-    const { Authorization, user } = useAuthContext();
-    const { data: orderDetails } = useQuery(
-        ["orderDetail", user && user.nickname],
-        async () => {
-            const header = {
-                headers: {
-                    Authorization,
-                },
-            };
-            return axios
-                .get("http://192.168.0.203:8080/api/paymentInfo", header)
-                .then((res) => res.data.payList);
-        }
-    );
+    // const { Authorization, user } = useAuthContext();
+    const {
+        orderDetaiQuery: { data: orderDetails },
+    } = useOrderDetail();
+    // const { data: orderDetails } = useQuery(
+    //     ["orderDetail", user && user.nickname],
+    //     async () => {
+    //         const header = {
+    //             headers: {
+    //                 Authorization,
+    //             },
+    //         };
+    //         return axios
+    //             .get("http://192.168.0.203:8080/api/paymentInfo", header)
+    //             .then((res) => res.data.payList);
+    //     }
+    // );
     // console.log(orderDetails);
     return (
         <div className="pl-56 w-5/6 min-h-1/2">

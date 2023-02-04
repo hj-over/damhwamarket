@@ -5,17 +5,17 @@ import { useAuthContext } from "../context/AuthContext";
 export default function useCarts() {
     const { Authorization, user } = useAuthContext();
     const queryClient = useQueryClient();
-    const cartsQuery = useQuery(
-        ["carts", user ? user.nickname : ""],
-        async () => {
-            return axios
-                .get(`http://192.168.0.203:8080/api/carts`, {
-                    headers: { Authorization },
-                })
-                .then((res) => res.data.data)
-                .catch((err) => console.log(err));
-        }
-    );
+
+    const cartsQuery = useQuery(["carts", user && user.nickname], async () => {
+        return user
+            ? axios
+                  .get(`http://192.168.0.203:8080/api/carts`, {
+                      headers: { Authorization },
+                  })
+                  .then((res) => res.data.data)
+                  .catch((err) => console.log(err))
+            : null;
+    });
 
     return { cartsQuery };
 }
