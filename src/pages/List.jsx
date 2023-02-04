@@ -9,6 +9,7 @@ import NavList from "../components/NavList";
 import Spinner from "../components/Spinner";
 import { v4 as uuidv4 } from "uuid";
 import useProducts from "../hooks/useProducts";
+import ErrorPage from "./ErrorPage";
 // http://192.168.0.203:8080/api/products/categories?keyword=${keyword}
 // takju chungju soju wine
 const List = () => {
@@ -197,7 +198,7 @@ const List = () => {
                 </div>
             </div>
             {isLoading && <Spinner />}
-            {error && <p>에러났어요</p>}
+            {error && <ErrorPage/>}
             {products && (
                 <div className="grid grid-cols-4 max-w-screen-xl m-auto">
                     {products.map((item, index) => (
