@@ -28,11 +28,11 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 ![emotion](https://img.shields.io/badge/emotion-D26AC2.svg?style=for-the-badge&logo=emotion&logoColor=D26AC2&logoWidth=20)
 ![react](https://img.shields.io/badge/react-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black&logoWidth=20)
 ![styled-components](https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
-![react-router](https://img.shields.io/badge/reactrouter-CA4245.svg?style=for-the-badge&logo=reactrouter&logoColor=black&logoWidth=20)
+<img src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=React Router&logoColor=white"/>
 ![swiper](https://img.shields.io/badge/swiper-6332F6.svg?style=for-the-badge&logo=swiper&logoColor=white&logoWidth=20)
-![react-query](https://img.shields.io/badge/reactquery-FF4154.svg?style=for-the-badge&logo=reactquery&logoColor=white&logoWidth=20)
-<img src="https://img.shields.io/badge/React Query-FF4154?style=flat-square&logo=React Query&logoColor=white"/>
-<img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=React Router&logoColor=white"/>
+<img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white"/>
+<img src="https://img.shields.io/badge/React Icons-ffffff?style=for-the-badge&logo=React Icons&logoColor=e91e63"/>
+
 `<br/>`
 
 ### 소통/협업
