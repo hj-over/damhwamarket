@@ -31,8 +31,8 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 <img src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=React Router&logoColor=white"/>
 ![swiper](https://img.shields.io/badge/swiper-6332F6.svg?style=for-the-badge&logo=swiper&logoColor=white&logoWidth=20)
 <img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white"/>
-<img src="https://img.shields.io/badge/React Icons-ffffff?style=for-the-badge&logo=React Icons&logoColor=e91e63"/>
-
+<img src="https://img.shields.io/badge/React Icons-ffffff?style=for-the-badge&logo=React Icons&logoColor=hotpink"/>
+<img src="https://img.shields.io/badge/AXIOS-5A29E4?style=for-the-badge&logo=AXIOS&logoColor=white"/>
 `<br/>`
 
 ### 소통/협업
