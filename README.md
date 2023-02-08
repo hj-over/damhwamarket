@@ -19,6 +19,7 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 
 ### 개발 프로그램 & 언어
 
+<img src="https://img.shields.io/badge/visual studio code-007ACC?style=for-the-badge&logo=visual studio code&logoColor=white"/>
 ![visualcode](https://img.shields.io/badge/visualstudiocode-007ACC.svg?style=for-the-badge&logo=visualstudiocode&logoColor=white&logoWidth=20)
 ![JavaScript](https://img.shields.io/badge/javascript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=white)
 
@@ -31,19 +32,18 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 <img src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=React Router&logoColor=white"/>
 ![swiper](https://img.shields.io/badge/swiper-6332F6.svg?style=for-the-badge&logo=swiper&logoColor=white&logoWidth=20)
 <img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white"/>
-<img src="https://img.shields.io/badge/React Icons-ffffff?style=for-the-badge&logo=React Icons&logoColor=hotpink"/>
+<img src="https://img.shields.io/badge/React Icons-e91e63?style=for-the-badge&logo=React Icons&logoColor=white"/>
 <img src="https://img.shields.io/badge/AXIOS-5A29E4?style=for-the-badge&logo=AXIOS&logoColor=white"/>
-`<br/>`
 
 ### 소통/협업
 
-` <a href="https://tourmaline-atlasaurus-77b.notion.site/FB-1-50dbb3df74e040c394809ad8e97b4927"><img src="https://img.shields.io/badge/notion-000000.svg?style=for-the-badge&logo=notion&logoColor=white&link=https://tourmaline-atlasaurus-77b.notion.site/FB-1-50dbb3df74e040c394809ad8e97b4927">``</a> `
-![slack](https://img.shields.io/badge/slack-4A154B.svg?style=for-the-badge&logo=slack&logoColor=white&logoWidth=20) `<br/>`
+![notion](https://img.shields.io/badge/notion-000000.svg?style=for-the-badge&logo=notion&logoColor=white&logoWidth=20)
+![slack](https://img.shields.io/badge/slack-4A154B.svg?style=for-the-badge&logo=slack&logoColor=white&logoWidth=20)
 
 ### 코드관리
 
 ![github](https://img.shields.io/badge/github-181717.svg?style=for-the-badge&logo=github&logoColor=white&logoWidth=20)
-![sourcetree](https://img.shields.io/badge/sourcetree-0052CC.svg?style=for-the-badge&logo=sourcetree&logoColor=white&logoWidth=20) `<br/>`
+![sourcetree](https://img.shields.io/badge/sourcetree-0052CC.svg?style=for-the-badge&logo=sourcetree&logoColor=white&logoWidth=20)
 
 ### 디자인
 
