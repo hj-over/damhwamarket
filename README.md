@@ -84,4 +84,4 @@ UI 디자인 구성은 Figma를 이용했고 디자인 구현은 Tailwind CSS와
 #### 협업 툴
 
 ![notion](https://img.shields.io/badge/notion-000000.svg?style=for-the-badge&logo=notion&logoColor=white&logoWidth=20)
-![slack](https://img.shields.io/badge/slack-4A154B.svg?style=for-the-badge&logo=slack&logoColor=white&logoWidth=20) `<br/>`
+![slack](https://img.shields.io/badge/slack-4A154B.svg?style=for-the-badge&logo=slack&logoColor=white&logoWidth=20)
